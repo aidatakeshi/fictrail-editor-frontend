@@ -33,20 +33,20 @@ export default {
         make(content, type = null){ //type: info, success, warning, error
             const toast = {content, type, id: this.nextID++, hidden: false};
             //Push to toasts
-            this.toasts.unshift(toast);
+            this.toasts.push(toast);
             //Set toast life
             setTimeout(this.hideToast, this.hideToastAfter);
             setTimeout(this.destroyToast, this.destroyToastAfter);
         },
         hideToast(){
-            for (let i = this.toasts.length - 1; i >= 0; i--){
+            for (let i in this.toasts){
                 if (!this.toasts[i].hidden){
                     return this.toasts[i].hidden = true;
                 }
             }
         },
         destroyToast(){
-            this.toasts.pop();
+            this.toasts.shift();
         },
         setLoading(isLoading){
             this.isLoading = isLoading;
@@ -71,7 +71,7 @@ export default {
             </div>
         </div>
         <!-- Toasts -->
-        <div class="toast toast-top toast-end">
+        <div class="toast">
             <template v-for="(toast, i) in toasts">
                 <transition name="fade">
                     <div :id="toast.id" v-if="!toast.hidden">
