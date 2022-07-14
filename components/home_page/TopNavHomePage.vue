@@ -1,4 +1,8 @@
 <script>
+/**
+ * Emits: @login-button, @logout-button
+ */
+
 import common from '../../mixins/common.js';
 import _languages from '../../strings/_languages.js';
 
@@ -12,18 +16,10 @@ library.add(
     faMoon, faSun, faLanguage, faArrowRightFromBracket, faArrowRightToBracket, faBars, faUser
 );
 
-import TopNavDropdown from './TopNavDropdown';
-import TopNavDropdownButton from './TopNavDropdownButton';
-import AuthHandler from './../general/AuthHandler';
-
 export default {
     name: 'HomePageTopNav',
     mixins: [common],
-    components: {
-        FontAwesomeIcon,
-        TopNavDropdown, TopNavDropdownButton,
-        AuthHandler,
-    },
+    components: { FontAwesomeIcon },
 
     data: () => ({
         languages: _languages.languages,
@@ -32,10 +28,10 @@ export default {
 </script>
 
 <template>
-    <div class="bg-jackson text-slate-100 flex items-center px-2 md:pl-8 md:pr-4">
+    <div class="bg-parsley text-slate-100 flex items-center px-2 md:pl-8 md:pr-4">
 
         <!-- Title -->
-        <div class="mr-auto text-xl py-2 lg:text-2xl">
+        <div class="mr-auto text-xl lg:text-2xl font-semibold py-2">
             {{s$('general/top_title')}}
         </div>
 
@@ -69,7 +65,7 @@ export default {
 
             <!-- Login Button -->
             <template v-if="!$store.state.myself">
-                <button class="top-nav-button" @click="$refs.auth_handler.showLoginModal()">
+                <button class="top-nav-button" @click="$emit('login-button')">
                     <font-awesome-icon size="xl" icon="fa-solid fa-arrow-right-to-bracket" />
                     <span class="ml-2">{{s$('general/login')}}</span>
                 </button>
@@ -82,7 +78,7 @@ export default {
                     <span class="ml-2">{{($store.state.myself||{}).name}}</span>
                 </label>
                 <ul tabindex="0" class="top-nav-dropdown-content">
-                    <li @click="$refs.auth_handler.handleLogout()">
+                    <li @click="$emit('logout-button')">
                         <a class="top-nav-dropdown-item">
                             <font-awesome-icon size="xl" icon="fa-solid fa-arrow-right-to-bracket" />
                             <span>{{s$('general/logout')}}</span>
@@ -103,7 +99,7 @@ export default {
                 <div tabindex="0" class="top-nav-dropdown-card w-64">
                     <!-- Login Button -->
                     <div v-if="!$store.state.myself">
-                        <button class="top-nav-dropdown-button btn-block" @click="$refs.auth_handler.showLoginModal()">
+                        <button class="top-nav-dropdown-button btn-block" @click="$emit('login-button')">
                             <font-awesome-icon size="xl" icon="fa-solid fa-arrow-right-to-bracket" />
                             <span class="ml-2">{{s$('general/login')}}</span>
                         </button>
@@ -118,7 +114,7 @@ export default {
                             </span>
                         </div>
 
-                        <button class="top-nav-dropdown-button btn-block" @click="$refs.auth_handler.handleLogout()">
+                        <button class="top-nav-dropdown-button btn-block" @click="$emit('logout-button')">
                             <font-awesome-icon size="xl" icon="fa-solid fa-arrow-right-to-bracket" />
                             <span class="ml-2">{{s$('general/logout')}}</span>
                         </button>
@@ -152,9 +148,6 @@ export default {
 
             </div>
         </div>
-
-        <!-- AuthHandler -->
-        <AuthHandler ref="auth_handler" />
 
     </div>
 </template>

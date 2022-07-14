@@ -1,9 +1,10 @@
 <script>
 /**
  * Login Modal + Logout Handler + Bearer Token Session Handler
+ * Emits: @myself(data), @logged-in, @login-failed, @logged-out, @logout-failed
  */
 
-import common from '../../mixins/common.js';
+import common from '../mixins/common.js';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -11,8 +12,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 library.add(faXmark);
 
-import Modal from './Modal'
-import Spinner from './Spinner';
+import Modal from './general/Modal'
+import Spinner from './general/Spinner';
 
 export default {
     name: 'AuthHandler',
@@ -34,13 +35,13 @@ export default {
     },
 
     methods: {
-        async getMyself(){ //Emits: myself(data), not-logged-in
+        async getMyself(){ //Emits: myself(data)
             //Get Tokens
             const bearer_token = this.getBearerToken();
             const file_token = this.getFileToken();
             if (!bearer_token){
                 this.$store.commit('myself', null);
-                return this.$emit('not-logged-in');
+                return this.$emit('myself', null);
             }
             //Get Myself
             const response = await this.callAPI('GET', 'myself');
@@ -48,7 +49,7 @@ export default {
             if (response._error == 401){
                 this.setBearerToken(null);
                 this.setFileToken(null);
-                return this.$emit('not-logged-in');
+                return this.$emit('myself', null);
             }
             //Store myself to state
             this.$store.commit('myself', response);
@@ -117,19 +118,31 @@ export default {
         <!-- Login Modal -->
         <Modal narrow ref="login_modal" :title="s$('general/login')">
 
-            <input type="text" v-model="username" :placeholder="s$('login/username')"
-            @focus="error = null" class="my-input w-full mb-2" />
+            <div class="mb-2">
+                <label class="label py-0" for="username">
+                    {{s$('login/username')}}
+                </label>
+                <input type="text" id="username" v-model="username" :placeholder="s$('login/username')"
+                @focus="error = null" class="my-input w-full" />
+            </div>
 
-            <input type="password" v-model="password" :placeholder="s$('login/password')"
-            @focus="error = null" class="my-input w-full mb-2" />
+            <div class="mb-2">
+                <label class="label py-0" for="password">
+                    {{s$('login/password')}}
+                </label>
+                <input type="password" id="password" v-model="password" :placeholder="s$('login/password')"
+                @focus="error = null" class="my-input w-full" />
+            </div>
 
-            <button class="my-btn btn-block"
+            <button class="btn btn-primary btn-block -my-btn"
             :disabled="!username || !password || isLoading" @click="submitLogin">
                 <span v-if="!isLoading">{{s$('general/submit')}}</span>
                 <span v-else><Spinner /></span>
             </button>
 
-            <div class="text-center text-error mt-2" v-if="error">{{error}}</div>
+            <label class="label text-error" v-if="error">
+                {{error}}
+            </label>
 
         </Modal>
 

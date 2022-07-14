@@ -2,14 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
-.my-input {
-    @apply input bg-slate-100 dark:bg-slate-900;
+.my-id {
+    @apply kbd kbd-xs text-slate-700 dark:text-slate-300;
+    @apply bg-slate-300 dark:bg-slate-700 dark:border-slate-500;
 }
 
-.my-btn {
-    @apply btn btn-primary normal-case;
+/* Forms */
+.my-input {
+    @apply input bg-slate-100 dark:bg-slate-900;
+    @apply disabled:bg-gray-300 disabled:text-gray-500 disabled:border-none;
+    @apply dark:disabled:bg-gray-700 dark:disabled:text-gray-500;
+}
+
+/* Buttons */
+.-my-btn {
+    @apply normal-case text-white whitespace-nowrap;
     @apply disabled:bg-gray-300 disabled:text-gray-500;
     @apply dark:disabled:bg-gray-700 dark:disabled:text-gray-500;
+}
+
+/* Table */
+.my-table{
+    @apply table-auto min-w-full border-collapse border;
+    @apply border-slate-300 dark:border-slate-700;
+}
+.my-table thead th{
+    @apply border border-jackson bg-jackson text-white whitespace-nowrap;
+    @apply text-sm md:text-base;
+    @apply px-1 md:px-2 py-2;
+}
+.my-table tbody th{
+    @apply border border-slate-300 dark:border-slate-700 bg-slate-300 dark:bg-slate-700;
+    @apply text-xs md:text-sm;
+    @apply px-1 md:px-2 py-2;
+}
+.my-table tbody td{
+    @apply border border-slate-300 dark:border-slate-700;
+    @apply text-xs md:text-sm;
+    @apply px-1 md:px-2 py-2;
+}
+.my-table-hover{
+    @apply hover:bg-yellow-100 dark:hover:bg-stone-800;
 }
 
 /* Navigation Bar */
