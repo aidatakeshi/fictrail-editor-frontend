@@ -7,6 +7,7 @@ export default {
     components: {},
 
     props: {
+        dropdownClass: null,
     },
 
     data: () => ({
@@ -16,14 +17,12 @@ export default {
 
 <template>
     <div class="dropdown dropdown-end">
-        <label tabindex="0" class="btn btn-ghost normal-case px-2">
+        <label tabindex="0" class="top-nav-dropdown">
             <slot name="label" />
         </label>
-        <ul tabindex="0" class="
-            dropdown-content menu p-2 shadow rounded-box
-            bg-slate-300 dark:bg-slate-800 text-slate-900 dark:text-slate-100
-        ">
+        <div tabindex="0" :class="dropdownClass"
+        class="top-nav-dropdown-card">
             <slot />
-        </ul>
+        </div>
     </div>
 </template>

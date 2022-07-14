@@ -2,3 +2,43 @@
 @tailwind components;
 @tailwind utilities;
 
+.my-input {
+    @apply input bg-slate-100 dark:bg-slate-900;
+}
+
+.my-btn {
+    @apply btn btn-primary normal-case;
+    @apply disabled:bg-gray-300 disabled:text-gray-500;
+    @apply dark:disabled:bg-gray-700 dark:disabled:text-gray-500;
+}
+
+/* Navigation Bar */
+.top-nav-button {
+    @apply btn btn-ghost normal-case px-2;
+}
+.top-nav-dropdown {
+    @apply btn btn-ghost normal-case px-2;
+}
+.top-nav-dropdown-content {
+    @apply dropdown-content menu p-2 shadow rounded-xl;
+    @apply bg-slate-300 dark:bg-slate-700 text-slate-900 dark:text-slate-100;
+}
+.top-nav-dropdown-item {
+    @apply normal-case whitespace-nowrap rounded-lg;
+    @apply text-black dark:text-white;
+    @apply hover:bg-slate-400 dark:hover:bg-slate-600;
+}
+.top-nav-dropdown-item.selected{
+    @apply bg-slate-500 hover:bg-slate-500 text-white;
+}
+.top-nav-dropdown-card {
+    @apply dropdown-content card card-compact p-2 shadow;
+    @apply bg-slate-300 dark:bg-slate-700 text-slate-900 dark:text-slate-100;
+}
+.top-nav-dropdown-button {
+    @apply btn btn-ghost btn-sm normal-case whitespace-nowrap p-0;
+    @apply hover:bg-slate-400 dark:hover:bg-slate-600;
+}
+.top-nav-dropdown-button.selected{
+    @apply bg-slate-500 hover:bg-slate-500 text-white;
+}

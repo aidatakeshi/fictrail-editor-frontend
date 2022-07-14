@@ -16,6 +16,7 @@
     "@nuxtjs/color-mode": "^2.1.1",
     "@nuxtjs/dotenv": "^1.4.1",
     "@nuxtjs/google-fonts": "^2.0.0",
+    "axios": "^0.27.2",
     "chart.js": "^3.8.0",
     "core-js": "^3.19.3",
     "daisyui": "^2.18.1",

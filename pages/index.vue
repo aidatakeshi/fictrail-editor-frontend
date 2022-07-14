@@ -28,51 +28,9 @@ export default {
             <!-- Main Body -->
             <div class="max-w-4xl mx-auto p-2">
                 
-                <button class="btn" @click="$refs.test_modal.show()">Show</button>
-                <Modal ref="test_modal" title="Test 114514" wide close-at-bg>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                    <div>24-years old student</div>
-                </Modal>
+                {{$store.state.bearer_token}}
+                <hr/>
+                {{$store.state.myself}}
 
             </div>
         </div>

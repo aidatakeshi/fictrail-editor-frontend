@@ -14,14 +14,9 @@ exports.strings = {
         "zh-hk": "登出",
         "zh-cn": "登出",
     },
-    "normal_mode": {
-        "en":    "Normal Mode",
-        "zh-hk": "正常模式",
-        "zh-cn": "正常模式",
-    },
-    "dark_mode": {
-        "en":    "Dark Mode",
-        "zh-hk": "夜間模式",
-        "zh-cn": "夜间模式",
+    "submit": {
+        "en":    "Submit",
+        "zh-hk": "提交",
+        "zh-cn": "提交",
     },
 };

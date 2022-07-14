@@ -16,15 +16,15 @@ export default {
             }
             return defaultValue;
         },
-
         getBearerToken(){
             return this.getSettings("bearer_token");
         },
-        
+        getFileToken(){
+            return this.getSettings("file_token");
+        },
         getLanguage(){
             return this.getSettings("language", "en");
         },
-        
         getColorMode(){
             return this.getSettings("color_mode", "normal");
         },
@@ -43,21 +43,21 @@ export default {
                 }
             }
         },
-
         setBearerToken(value){
             this.setSettings("bearer_token", value);
         },
-        
+        setFileToken(value){
+            this.setSettings("file_token", value);
+        },
         setLanguage(value){
             this.setSettings("language", value);
         },
-        
         setColorMode(value){
             this.setSettings("color_mode", value);
         },
 
         /**
-         * Let Language String
+         * Get Language String
          */
         s$(string_id){
             const language = this.getLanguage();
@@ -79,9 +79,53 @@ export default {
             }
             return null;
         },
-
         getLanguageString(string_id){
             return this.s$(string_id);
+        },
+
+        /**
+         * Call API
+         */
+        async callAPI(APIMethod, APIRoute, data = {}, bearerTokenRequired = true){
+            //Set Base URL
+            this.$axios.setBaseURL(process.env.API_BASE_URL);
+            //Handle Bearer Token
+            if (bearerTokenRequired){
+                this.$axios.setToken(this.getBearerToken() || "", "Bearer");
+            }else{
+                this.$axios.setToken(false);
+            }
+            //Make API Call
+            APIMethod = APIMethod.toUpperCase();
+            let response;
+            try{
+                if (APIMethod === 'GET'){
+                    response = await this.$axios.$get(APIRoute, data);
+                }else if (APIMethod === 'POST'){
+                    response = await this.$axios.$post(APIRoute, data);
+                }else if (APIMethod === 'PATCH'){
+                    response = await this.$axios.$patch(APIRoute, data);
+                }else if (APIMethod === 'PUT'){
+                    response = await this.$axios.$put(APIRoute, data);
+                }else if (APIMethod === 'DELETE'){
+                    response = await this.$axios.$delete(APIRoute, data);
+                }else{
+                    return null;
+                }
+            }
+            //Handle Errors
+            catch (error){
+                if (error.response){
+                    const data = error.response.data || {};
+                    const _error = error.response.status;
+                    return {_error, ...data};
+                }else{
+                    //No Response Error
+                    return { _status: null };
+                }
+            }
+            //No Errors
+            return {_error: false, ...response};
         },
 
     },
