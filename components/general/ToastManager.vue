@@ -65,9 +65,11 @@ export default {
     <div>
         <!-- Loading -->
         <div class="toast" v-if="isLoading">
-            <div class="alert bg-slate-200 dark:bg-slate-800">
-                <Spinner />
-                <div class="mt-2">{{s$('general/loading')}}</div>
+            <div class="alert shadow-lg bg-slate-200 dark:bg-slate-800">
+                <div>
+                    <Spinner />
+                    <span>{{s$('general/loading')}}</span>
+                </div>
             </div>
         </div>
         <!-- Toasts -->
@@ -75,29 +77,32 @@ export default {
             <template v-for="(toast, i) in toasts">
                 <transition name="fade">
                     <div :id="toast.id" v-if="!toast.hidden">
-                        <div v-if="toast.type == 'info'"
-                        class="alert gap-2 alert-info">
-                            <font-awesome-icon size="xl" icon="fa-solid fa-circle-info" />
-                            {{toast.content}}
+                        <div v-if="toast.type == 'info'" class="alert shadow-lg alert-info">
+                            <div>
+                                <font-awesome-icon size="xl" icon="fa-solid fa-circle-info" />
+                                <span>{{toast.content}}</span>
+                            </div>
                         </div>
-                        <div v-else-if="toast.type == 'success'"
-                        class="alert gap-2 alert-success">
-                            <font-awesome-icon size="xl" icon="fa-solid fa-circle-check" />
-                            {{toast.content}}
+                        <div v-else-if="toast.type == 'success'" class="alert shadow-lg alert-success">
+                            <div>
+                                <font-awesome-icon size="xl" icon="fa-solid fa-circle-check" />
+                                <span>{{toast.content}}</span>
+                            </div>
                         </div>
-                        <div v-else-if="toast.type == 'warning'"
-                        class="alert gap-2 alert-warning">
-                            <font-awesome-icon size="xl" icon="fa-solid fa-circle-exclamation" />
-                            {{toast.content}}
+                        <div v-else-if="toast.type == 'warning'" class="alert shadow-lg alert-warning">
+                            <div>
+                                <font-awesome-icon size="xl" icon="fa-solid fa-circle-exclamation" />
+                                <span>{{toast.content}}</span>
+                            </div>
                         </div>
-                        <div v-else-if="toast.type == 'error'"
-                        class="alert gap-2 alert-error">
-                            <font-awesome-icon size="xl" icon="fa-solid fa-triangle-exclamation" />
-                            {{toast.content}}
+                        <div v-else-if="toast.type == 'error'" class="alert shadow-lg alert-error">
+                            <div>
+                                <font-awesome-icon size="xl" icon="fa-solid fa-triangle-exclamation" />
+                                <span>{{toast.content}}</span>
+                            </div>
                         </div>
-                        <div v-else
-                        class="alert gap-2 bg-slate-200 dark:bg-slate-800">
-                            {{toast.content}}
+                        <div v-else class="alert shadow-lg bg-slate-200 dark:bg-slate-800">
+                            <span>{{toast.content}}</span>
                         </div>
                     </div>
                 </transition>

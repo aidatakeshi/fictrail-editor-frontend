@@ -1,6 +1,8 @@
 <script>
 //import common from '../../mixins/common.js';
 
+import { v4 as uuid } from 'uuid';
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -24,12 +26,14 @@ export default {
     },
 
     data: () => ({
+        modal_id: null,
         toggle: false,
     }),
 
     methods: {
         show(){
             this.toggle = true;
+            this.modal_id = uuid();
         },
         hide(){
             this.toggle = false;
@@ -40,12 +44,12 @@ export default {
         modalBoxClass(){
             if (this.full){
                 return ['max-w-full', 'max-h-full', 'rounded-none'];
+            }else if (this.wide){
+                return ['max-w-6xl', 'rounded-xl', 'm-2'];
             }else if (this.narrow){
                 return ['max-w-sm', 'rounded-xl', 'm-2'];
-            }else if (this.wide){
-                return ['max-w-6xl', 'rounded-none', 'sm:rounded-xl', 'm-2'];
             }else{
-                return ['rounded-none', 'sm:rounded-xl', 'm-2'];
+                return ['rounded-xl', 'm-2'];
             }
         },
     },
@@ -60,21 +64,19 @@ export default {
 
 <template>
     <div>
-        <input type="checkbox" id="_modal" class="modal-toggle" v-model="toggle" />
+        <input type="checkbox" :id="modal_id" class="modal-toggle" v-model="toggle" />
 
-        <label :for="closeAtBg ? '_modal' : ''"
+        <label :for="closeAtBg ? modal_id : ''"
         class="modal" :class="closeAtBg ? 'cursor-pointer' : null">
 
-            <label for="" class="
-                modal-box relative p-0 w-full flex flex-col
-                bg-white dark:bg-black text-black dark:text-white
-            " :class="modalBoxClass">
+            <label for="" class="modal-box relative p-0 w-full flex flex-col
+            bg-white dark:bg-black text-black dark:text-white" :class="modalBoxClass">
 
                 <div :class="bodyClass">
 
                     <!-- Header -->
                     <div class="flex items-center bg-slate-600 text-white"
-                    v-if="title || $slots.title">
+                    v-if="title || $slots.header">
                         <h3 class="text-lg font-bold px-2 sm:px-4 py-3">
                             <slot name="header">
                                 {{title}}

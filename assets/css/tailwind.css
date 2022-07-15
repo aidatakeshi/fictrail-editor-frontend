@@ -3,11 +3,16 @@
 @tailwind utilities;
 
 .my-id {
-    @apply kbd kbd-xs text-slate-700 dark:text-slate-300;
+    @apply kbd kbd-xs;
+    @apply text-slate-700 dark:text-slate-300;
     @apply bg-slate-300 dark:bg-slate-700 dark:border-slate-500;
 }
 
 /* Forms */
+.my-box {
+    @apply m-1 p-1 rounded-md;
+    @apply border border-slate-100 dark:border-slate-800;
+}
 .my-input {
     @apply input bg-slate-100 dark:bg-slate-900;
     @apply disabled:bg-gray-300 disabled:text-gray-500 disabled:border-none;

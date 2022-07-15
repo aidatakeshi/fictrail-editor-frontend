@@ -74,6 +74,51 @@ exports.strings = {
         "zh-hk": "請在以下輸入專案的ID以作確認：",
         "zh-cn": "请在以下输入专案的ID以作确认：",
     },
+    "project_assign": {
+        "en":    "Project Assignment",
+        "zh-hk": "專案使用者",
+        "zh-cn": "专案使用者",
+    },
+    "project_assign/user": {
+        "en":    "User",
+        "zh-hk": "用戶",
+        "zh-cn": "用户",
+    },
+    "project_assign/user_id": {
+        "en":    "User ID",
+        "zh-hk": "用戶ID",
+        "zh-cn": "用户ID",
+    },
+    "project_assign/name": {
+        "en":    "Name",
+        "zh-hk": "名稱",
+        "zh-cn": "名稱",
+    },
+    "project_assign/rights": {
+        "en":    "Rights",
+        "zh-hk": "權限",
+        "zh-cn": "权限",
+    },
+    "project_assign/assigned_by": {
+        "en":    "Assigned By",
+        "zh-hk": "加入者",
+        "zh-cn": "加入者",
+    },
+    "project_assign/change": {
+        "en":    "Change",
+        "zh-hk": "更改",
+        "zh-cn": "更改",
+    },
+    "project_assign/info_public": {
+        "en":    "This is a project that allows public viewing.",
+        "zh-hk": "這是一個容許公開閱覽的專案。",
+        "zh-cn": "这是一个容许公开阅览的专案。",
+    },
+    "project_assign/assign_user": {
+        "en":    "Assign User",
+        "zh-hk": "加入用戶",
+        "zh-cn": "加入用户",
+    },
     "my_rights/root": {
         "en":    "Root",
         "zh-hk": "根用戶",
@@ -118,5 +163,25 @@ exports.strings = {
         "en":    "Confirmation Failed.",
         "zh-hk": "確認錯誤。",
         "zh-cn": "确认错误。",
+    },
+    "toasts/user_assign_new": {
+        "en":    "User Assigned to This Project.",
+        "zh-hk": "已新增用戶至此專案。",
+        "zh-cn": "已新增用户至此专案。",
+    },
+    "toasts/user_assign_edit": {
+        "en":    "User Assignment Changed.",
+        "zh-hk": "用戶權限已更改。",
+        "zh-cn": "用户权限已更改。",
+    },
+    "toasts/user_assign_remove": {
+        "en":    "User Unassigned.",
+        "zh-hk": "用戶權限已移除。",
+        "zh-cn": "用户权限已移除。",
+    },
+    "user_not_found": {
+        "en":    "User Not Found.",
+        "zh-hk": "找不到用戶。",
+        "zh-cn": "找不到用戶。",
     },
 };

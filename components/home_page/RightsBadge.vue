@@ -50,6 +50,8 @@ export default {
     <div class="badge text-white whitespace-nowrap badge-sm md:badge-md"
     :class="bg_class">
         <font-awesome-icon :icon="`fa-solid ${icon}`" />
-        {{s$(`project_list/my_rights/${right_type}`)}}
+        <span class="ml-1">
+            {{s$(`project_list/my_rights/${right_type}`)}}
+        </span>
     </div>
 </template>

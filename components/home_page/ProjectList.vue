@@ -16,13 +16,14 @@ import Pagination from '../general/Pagination'
 import RightsBadge from './RightsBadge'
 import Modal from '../general/Modal'
 import ToastManager from '../general/ToastManager'
+import ProjectAssignmentModal from './ProjectAssignmentModal'
 
 export default {
     name: 'HomePageProjectList',
     mixins: [common],
     components: {
         FontAwesomeIcon,
-        Spinner, Pagination, RightsBadge, Modal, ToastManager,
+        Spinner, Pagination, RightsBadge, Modal, ToastManager, ProjectAssignmentModal,
     },
 
     data: () => ({
@@ -167,8 +168,10 @@ export default {
                             <th>{{s$('project_list/column/id')}}</th>
                             <th>{{s$('project_list/column/my_rights')}}</th>
                             <th>{{s$('project_list/column/created_by')}}</th>
-                            <th>{{s$('project_list/column/edit')}}</th>
-                            <th>{{s$('project_list/column/users')}}</th>
+                            <template v-if="$store.state.myself">
+                                <th>{{s$('project_list/column/edit')}}</th>
+                                <th>{{s$('project_list/column/users')}}</th>
+                            </template>
                         </tr>
                     </thead>
                     <tbody>
@@ -201,20 +204,22 @@ export default {
                                 </nuxt-link>
                             </td>
                             <!-- Edit & Assign -->
-                            <td class="text-center w-6">
-                                <button @click="editProjectModal(project)"
-                                class="btn btn-sm btn-secondary -my-btn -my-1"
-                                :disabled="!['root', 'owner', 'editor'].includes(project.my_rights)">
-                                    <font-awesome-icon icon="fa-solid fa-pen-to-square" />
-                                </button>
-                            </td>
-                            <td class="text-center w-6">
-                                <button
-                                class="btn btn-sm btn-secondary -my-btn -my-1"
-                                :disabled="!['root', 'owner'].includes(project.my_rights)">
-                                    <font-awesome-icon icon="fa-solid fa-user-gear" />
-                                </button>
-                            </td>
+                            <template v-if="$store.state.myself">
+                                <td class="text-center w-6">
+                                    <button @click="editProjectModal(project)"
+                                    class="btn btn-sm btn-secondary -my-btn -my-1"
+                                    :disabled="!['root', 'owner', 'editor'].includes(project.my_rights)">
+                                        <font-awesome-icon icon="fa-solid fa-pen-to-square" />
+                                    </button>
+                                </td>
+                                <td class="text-center w-6">
+                                    <button @click="$refs.project_assignment_modal.show(project)"
+                                    class="btn btn-sm btn-secondary -my-btn -my-1"
+                                    :disabled="!['root', 'owner'].includes(project.my_rights)">
+                                        <font-awesome-icon icon="fa-solid fa-user-gear" />
+                                    </button>
+                                </td>
+                            </template>
                             <!--------------------------->
                         </tr>
                     </tbody>
@@ -286,6 +291,9 @@ export default {
 
         <!-- Toast Manager -->
         <ToastManager ref="toasts" />
+
+        <!-- Project Assignment Modal -->
+        <ProjectAssignmentModal ref="project_assignment_modal" />
 
     </div>
 </template>
