@@ -10,10 +10,10 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import {
-    faMoon, faSun, faLanguage, faArrowRightFromBracket, faArrowRightToBracket, faBars, faUser
+    faMoon, faSun, faLanguage, faArrowRightFromBracket, faArrowRightToBracket, faBars, faUser, faPerson
 } from '@fortawesome/free-solid-svg-icons'
 library.add(
-    faMoon, faSun, faLanguage, faArrowRightFromBracket, faArrowRightToBracket, faBars, faUser
+    faMoon, faSun, faLanguage, faArrowRightFromBracket, faArrowRightToBracket, faBars, faUser, faPerson
 );
 
 export default {
@@ -78,6 +78,12 @@ export default {
                     <span class="ml-2">{{($store.state.myself||{}).name}}</span>
                 </label>
                 <ul tabindex="0" class="top-nav-dropdown-content">
+                    <li @click="$emit('TBD')">
+                        <a class="top-nav-dropdown-item">
+                            <font-awesome-icon size="xl" icon="fa-solid fa-person" />
+                            <span>{{s$('user/personal_info')}}</span>
+                        </a>
+                    </li>
                     <li @click="$emit('logout-button')">
                         <a class="top-nav-dropdown-item">
                             <font-awesome-icon size="xl" icon="fa-solid fa-arrow-right-to-bracket" />
@@ -114,6 +120,12 @@ export default {
                             </span>
                         </div>
 
+                        <hr class="my-1" />
+
+                        <button class="top-nav-dropdown-button btn-block" @click="$emit('TBD')">
+                            <font-awesome-icon size="xl" icon="fa-solid fa-person" />
+                            <span class="ml-2">{{s$('user/personal_info')}}</span>
+                        </button>
                         <button class="top-nav-dropdown-button btn-block" @click="$emit('logout-button')">
                             <font-awesome-icon size="xl" icon="fa-solid fa-arrow-right-to-bracket" />
                             <span class="ml-2">{{s$('general/logout')}}</span>

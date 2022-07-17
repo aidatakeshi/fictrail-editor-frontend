@@ -51,7 +51,7 @@ export default {
     :class="bg_class">
         <font-awesome-icon :icon="`fa-solid ${icon}`" />
         <span class="ml-1">
-            {{s$(`project_list/my_rights/${right_type}`)}}
+            {{s$(`project/my_rights/${right_type}`)}}
         </span>
     </div>
 </template>

@@ -64,7 +64,7 @@ export default {
 <template>
     <div>
         <!-- Loading -->
-        <div class="toast" v-if="isLoading">
+        <div class="toast z-max" v-if="isLoading">
             <div class="alert shadow-lg bg-slate-200 dark:bg-slate-800">
                 <div>
                     <Spinner />
@@ -73,7 +73,7 @@ export default {
             </div>
         </div>
         <!-- Toasts -->
-        <div class="toast">
+        <div class="toast z-max">
             <template v-for="(toast, i) in toasts">
                 <transition name="fade">
                     <div :id="toast.id" v-if="!toast.hidden">
@@ -112,6 +112,9 @@ export default {
 </template>
 
 <style scoped>
+.z-max{
+    z-index: 114514;
+}
 .fade-enter-active, .fade-leave-active {
     transition: opacity 1s;
 }

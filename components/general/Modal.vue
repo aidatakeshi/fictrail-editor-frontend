@@ -43,9 +43,9 @@ export default {
     computed: {
         modalBoxClass(){
             if (this.full){
-                return ['max-w-full', 'max-h-full', 'rounded-none'];
+                return ['max-w-full', 'h-full', 'rounded-none', 'sm:m-2', 'sm:rounded-xl'];
             }else if (this.wide){
-                return ['max-w-6xl', 'rounded-xl', 'm-2'];
+                return ['max-w-4xl', 'rounded-xl', 'm-2'];
             }else if (this.narrow){
                 return ['max-w-sm', 'rounded-xl', 'm-2'];
             }else{

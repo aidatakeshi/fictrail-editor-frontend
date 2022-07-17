@@ -8,8 +8,12 @@ import common from '../../mixins/common.js';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import { faPenToSquare, faUserGear, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons'
-library.add( faPenToSquare, faUserGear, faPlus, faTrash );
+import {
+    faPenToSquare, faUserGear, faPlus, faTrash, faPeopleGroup
+} from '@fortawesome/free-solid-svg-icons'
+library.add(
+    faPenToSquare, faUserGear, faPlus, faTrash, faPeopleGroup
+);
 
 import Spinner from '../general/Spinner'
 import Pagination from '../general/Pagination'
@@ -17,13 +21,15 @@ import RightsBadge from './RightsBadge'
 import Modal from '../general/Modal'
 import ToastManager from '../general/ToastManager'
 import ProjectAssignmentModal from './ProjectAssignmentModal'
+import ManageUsersModal from './ManageUsersModal'
 
 export default {
     name: 'HomePageProjectList',
     mixins: [common],
     components: {
         FontAwesomeIcon,
-        Spinner, Pagination, RightsBadge, Modal, ToastManager, ProjectAssignmentModal,
+        Spinner, Pagination, RightsBadge, Modal, ToastManager,
+        ProjectAssignmentModal, ManageUsersModal,
     },
 
     data: () => ({
@@ -35,12 +41,13 @@ export default {
         count: null,
         data: [],
         can_create_new_project: false,
+        is_root_user: false,
         //New / Editing Project
         edit_project: {
             isNew: false,
             isLoading: false,
             data: {
-                id: null, name: null, is_public: null,
+                id: null, name: null, is_public: null, my_rights: null,
             },
             default: {
                 id: "", name: "", is_public: false,
@@ -55,6 +62,7 @@ export default {
         async loadData(_page = 1){
             const myself = this.$store.state.myself;
             this.can_create_new_project = ((myself || {}).can_create_new_project == true);
+            this.is_root_user = ((myself || {}).is_root_user == true);
             this.$refs.toasts.setLoading(true);
             //Get Project List
             let response;
@@ -104,23 +112,23 @@ export default {
                         }
                     }
                 }else{
-                    this.$refs.toasts.make(this.s$('project_list/toasts/submit_error'), 'error');
+                    this.$refs.toasts.make(this.s$('project/toasts/submit_error'), 'error');
                 }
                 return false;
             }
             //If No Error
             this.$refs.edit_project_modal.hide();
             if (isNew){
-                this.$refs.toasts.make(this.s$('project_list/toasts/new_success'), 'success');
+                this.$refs.toasts.make(this.s$('project/toasts/new_success'), 'success');
             }else{
-                this.$refs.toasts.make(this.s$('project_list/toasts/edit_success'), 'success');
+                this.$refs.toasts.make(this.s$('project/toasts/edit_success'), 'success');
             }
             await this.loadData(this.page);
         },
         async removeProjectModal(){
-            const p = prompt(this.s$('project_list/remove/confirm'));
+            const p = prompt(this.s$('project/remove/confirm'));
             if (p !== this.edit_project.data.id){
-                this.$refs.toasts.make(this.s$('project_list/toasts/confirmation_failed'), 'error');
+                this.$refs.toasts.make(this.s$('project/toasts/confirmation_failed'), 'error');
                 return false;
             }
             //Proceed Removal
@@ -129,11 +137,12 @@ export default {
             this.edit_project.isLoading = false;
             //If Error
             if (response._error){
-                this.$refs.toasts.make(this.s$('project_list/toasts/submit_error'), 'error');
+                this.$refs.toasts.make(this.s$('project/toasts/submit_error'), 'error');
+                return false;
             }
             //If No Error
             this.$refs.edit_project_modal.hide();
-            this.$refs.toasts.make(this.s$('project_list/toasts/remove_success'), 'success');
+            this.$refs.toasts.make(this.s$('project/toasts/remove_success'), 'success');
             await this.loadData(this.page);
         },
     },
@@ -143,34 +152,39 @@ export default {
 <template>
     <div>
         <h3 class="text-2xl lg:text-3xl font-semibold my-2">
-            {{s$('project_list/title')}}
+            {{s$('project/list_title')}}
         </h3>
 
         <!-- Results -->
         <div v-if="data.length">
 
             <!-- Pagination -->
-            <div class="flex flex-wrap items-center">
+            <div class="flex flex-wrap items-center gap-1">
                 <button v-if="can_create_new_project" @click="newProjectModal()"
                 class="btn btn-secondary btn-sm -my-btn my-2">
                     <font-awesome-icon icon="fa-solid fa-plus" />
-                    <span class="ml-2">{{s$('project_list/new_project')}}</span>
+                    <span class="ml-2">{{s$('project/new_project')}}</span>
+                </button>
+                <button v-if="is_root_user" @click="$refs.manage_users_modal.show()"
+                class="btn btn-neutral btn-sm -my-btn my-2">
+                    <font-awesome-icon icon="fa-solid fa-people-group" />
+                    <span class="ml-2">{{s$('user/manage_users')}}</span>
                 </button>
                 <Pagination class="ml-auto my-2" :page="page" :pages="pages" @page="loadData" />
             </div>
 
-            <!-- Table-->
+            <!-- Table -->
             <div class="overflow-x-auto">
                 <table class="my-table">
                     <thead>
                         <tr>
-                            <th>{{s$('project_list/column/project')}}</th>
-                            <th>{{s$('project_list/column/id')}}</th>
-                            <th>{{s$('project_list/column/my_rights')}}</th>
-                            <th>{{s$('project_list/column/created_by')}}</th>
+                            <th>{{s$('project/column/project')}}</th>
+                            <th>{{s$('project/column/id')}}</th>
+                            <th>{{s$('project/column/my_rights')}}</th>
+                            <th>{{s$('project/column/created_by')}}</th>
                             <template v-if="$store.state.myself">
-                                <th>{{s$('project_list/column/edit')}}</th>
-                                <th>{{s$('project_list/column/users')}}</th>
+                                <th>{{s$('project/column/edit')}}</th>
+                                <th>{{s$('project/column/users')}}</th>
                             </template>
                         </tr>
                     </thead>
@@ -181,7 +195,7 @@ export default {
                                 <nuxt-link :to="`/${project.id}`">
                                     <span class="font-semibold">{{project.name}}</span>
                                     <div class="badge badge-accent text-white badge-sm md:badge-md" v-if="project.is_public">
-                                        {{s$('project_list/public')}}
+                                        {{s$('project/public')}}
                                     </div>
                                 </nuxt-link>
                             </td>
@@ -227,22 +241,22 @@ export default {
             </div>
 
             <!-- Pagination (Copy) -->
-            <div class="flex flex-wrap items-center">
+            <div class="flex flex-wrap items-center gap-1">
                 <Pagination class="ml-auto my-2" :page="page" :pages="pages" @page="loadData" />
             </div>
 
         </div>
 
         <!-- New / Edit Project Modal -->
-        <Modal narrow ref="edit_project_modal"
-        :title="s$(`project_list/${edit_project.isNew ? 'new_project' : 'edit_project'}`)">
+        <Modal narrow ref="edit_project_modal" close-at-bg
+        :title="s$(`project/${edit_project.isNew ? 'new_project' : 'edit_project'}`)">
 
             <div class="mb-2">
                 <label class="label py-0" for="id">
-                    {{s$('project_list/edit_project/id')}}
+                    {{s$('project/edit_project/id')}}
                 </label>
                 <input type="text" id="id" v-model="edit_project.data.id"
-                :placeholder="s$('project_list/edit_project/id')" :disabled="!edit_project.isNew"
+                :placeholder="s$('project/edit_project/id')" :disabled="!edit_project.isNew"
                 @focus="resetProjectModalErrors" class="my-input w-full" />
                 <label class="label py-0 text-error">
                     {{edit_project.error.id}}
@@ -251,10 +265,10 @@ export default {
 
             <div class="mb-2">
                 <label class="label py-0" for="name">
-                    {{s$('project_list/edit_project/name')}}
+                    {{s$('project/edit_project/name')}}
                 </label>
                 <input type="text" id="name" v-model="edit_project.data.name"
-                :placeholder="s$('project_list/edit_project/name')"
+                :placeholder="s$('project/edit_project/name')"
                 @focus="resetProjectModalErrors" class="my-input w-full" />
                 <label class="label py-0 text-error">
                     {{edit_project.error.name}}
@@ -264,7 +278,7 @@ export default {
             <div class="mb-2 flex items-center">
                 <input type="checkbox" id="is_public" class="checkbox" v-model="edit_project.data.is_public" />
                 <label class="label py-0" for="is_public">
-                    {{s$('project_list/edit_project/is_public')}}
+                    {{s$('project/edit_project/is_public')}}
                 </label>
             </div>
 
@@ -276,12 +290,13 @@ export default {
             </button>
 
             <!-- Remove Button -->
-            <div class="text-center mt-2" v-if="!edit_project.isNew">
+            <div class="text-center mt-2"
+            v-if="!edit_project.isNew && edit_project.data.my_rights != 'editor'">
                 <button class="btn btn-neutral btn-sm -my-btn"
                 :disabled="edit_project.isLoading" @click="removeProjectModal">
                     <span v-if="!edit_project.isLoading">
                         <font-awesome-icon icon="fa-solid fa-trash" />
-                        <span class="ml-2">{{s$('project_list/remove')}}</span>
+                        <span class="ml-2">{{s$('project/remove')}}</span>
                     </span>
                     <span v-else><Spinner /></span>
                 </button>
@@ -294,6 +309,9 @@ export default {
 
         <!-- Project Assignment Modal -->
         <ProjectAssignmentModal ref="project_assignment_modal" />
+
+        <!-- Manage Users Modal -->
+        <ManageUsersModal v-if="is_root_user" ref="manage_users_modal" />
 
     </div>
 </template>

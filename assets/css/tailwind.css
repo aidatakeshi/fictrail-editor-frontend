@@ -10,7 +10,7 @@
 
 /* Forms */
 .my-box {
-    @apply m-1 p-1 rounded-md;
+    @apply p-2 rounded-md;
     @apply border border-slate-100 dark:border-slate-800;
 }
 .my-input {

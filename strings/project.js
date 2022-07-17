@@ -1,5 +1,5 @@
 exports.strings = {
-    "title": {
+    "list_title": {
         "en":    "Projects",
         "zh-hk": "專案一覽",
         "zh-cn": "专案一览",
