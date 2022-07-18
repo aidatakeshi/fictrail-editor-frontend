@@ -280,7 +280,7 @@ export default {
                     {{s$('user/password')}}
                 </label>
                 <input type="password" id="password" v-model="edit_user.data.password"
-                :placeholder="edit_user.isNew ? s$('user/password') : s$('user/password_change')"
+                :placeholder="edit_user.isNew ? s$('user/password') : s$('user/password_change_needed')"
                 @focus="resetUserModalErrors" class="my-input w-full" />
                 <label class="label py-0 text-error">
                     {{edit_user.error.password}}

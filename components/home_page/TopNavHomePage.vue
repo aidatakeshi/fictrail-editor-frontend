@@ -1,6 +1,6 @@
 <script>
 /**
- * Emits: @login-button, @logout-button
+ * Emits: @login-button, @logout-button, @personal-info-button
  */
 
 import common from '../../mixins/common.js';
@@ -78,7 +78,7 @@ export default {
                     <span class="ml-2">{{($store.state.myself||{}).name}}</span>
                 </label>
                 <ul tabindex="0" class="top-nav-dropdown-content">
-                    <li @click="$emit('TBD')">
+                    <li @click="$emit('personal-info-button')">
                         <a class="top-nav-dropdown-item">
                             <font-awesome-icon size="xl" icon="fa-solid fa-person" />
                             <span>{{s$('user/personal_info')}}</span>
@@ -122,7 +122,7 @@ export default {
 
                         <hr class="my-1" />
 
-                        <button class="top-nav-dropdown-button btn-block" @click="$emit('TBD')">
+                        <button class="top-nav-dropdown-button btn-block" @click="$emit('personal-info-button')">
                             <font-awesome-icon size="xl" icon="fa-solid fa-person" />
                             <span class="ml-2">{{s$('user/personal_info')}}</span>
                         </button>

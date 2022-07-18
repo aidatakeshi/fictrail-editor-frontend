@@ -1,8 +1,6 @@
 <script>
 //import common from '../../mixins/common.js';
 
-import { v4 as uuid } from 'uuid';
-
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
@@ -26,24 +24,27 @@ export default {
     },
 
     data: () => ({
-        modal_id: null,
         toggle: false,
     }),
 
     methods: {
         show(){
             this.toggle = true;
-            this.modal_id = uuid();
         },
         hide(){
             this.toggle = false;
+        },
+        bgClicked(){
+            if (this.closeAtBg){
+                this.toggle = false;
+            }
         },
     },
 
     computed: {
         modalBoxClass(){
             if (this.full){
-                return ['max-w-full', 'h-full', 'rounded-none', 'sm:m-2', 'sm:rounded-xl'];
+                return ['max-w-full', 'h-full', 'rounded-none', 'sm:m-8', 'sm:rounded-xl'];
             }else if (this.wide){
                 return ['max-w-4xl', 'rounded-xl', 'm-2'];
             }else if (this.narrow){
@@ -64,12 +65,11 @@ export default {
 
 <template>
     <div>
-        <input type="checkbox" :id="modal_id" class="modal-toggle" v-model="toggle" />
+        <input type="checkbox" class="modal-toggle" v-model="toggle" />
 
-        <label :for="closeAtBg ? modal_id : ''"
-        class="modal" :class="closeAtBg ? 'cursor-pointer' : null">
+        <div @click.self="bgClicked" class="modal">
 
-            <label for="" class="modal-box relative p-0 w-full flex flex-col
+            <div for="" class="modal-box relative p-0 w-full flex flex-col
             bg-white dark:bg-black text-black dark:text-white" :class="modalBoxClass">
 
                 <div :class="bodyClass">
@@ -103,8 +103,8 @@ export default {
                 </div>
 
                 <!---------------------------->
-            </label>
-        </label>
+            </div>
+        </div>
 
     </div>
 </template>

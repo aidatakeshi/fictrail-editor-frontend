@@ -18,6 +18,11 @@
     @apply disabled:bg-gray-300 disabled:text-gray-500 disabled:border-none;
     @apply dark:disabled:bg-gray-700 dark:disabled:text-gray-500;
 }
+.my-input-sm {
+    @apply input input-sm bg-slate-100 dark:bg-slate-900;
+    @apply disabled:bg-gray-300 disabled:text-gray-500 disabled:border-none;
+    @apply dark:disabled:bg-gray-700 dark:disabled:text-gray-500;
+}
 
 /* Buttons */
 .-my-btn {
