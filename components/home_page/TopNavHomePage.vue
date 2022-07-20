@@ -24,6 +24,15 @@ export default {
     data: () => ({
         languages: _languages.languages,
     }),
+
+    computed: {
+        lang: function(){
+            return this.$store.getters.language;
+        },
+        color_mode: function(){
+            return this.$store.getters.color_mode;
+        }
+    },
 }
 </script>
 
@@ -39,12 +48,12 @@ export default {
         <div class="hidden md:flex">
 
             <!-- Color Mode -->
-            <button class="top-nav-button" v-if="getColorMode() !== 'dark'"
-            @click="setColorMode('dark');">
+            <button class="top-nav-button" v-if="color_mode !== 'dark'"
+            @click="$store.commit('color_mode', 'dark');">
                 <font-awesome-icon size="xl" icon="fa-solid fa-sun" />
             </button>
             <button class="top-nav-button" v-else
-            @click="setColorMode('normal')">
+            @click="$store.commit('color_mode', 'normal')">
                 <font-awesome-icon size="xl" icon="fa-solid fa-moon" />
             </button>
             
@@ -52,11 +61,11 @@ export default {
             <div class="dropdown dropdown-end">
                 <label tabindex="0" class="top-nav-dropdown">
                     <font-awesome-icon size="xl" icon="fa-solid fa-language" />
-                    <span class="ml-2">{{(languages[getLanguage()]||{}).name_short}}</span>
+                    <span class="ml-2">{{(languages[lang]||{}).name_short}}</span>
                 </label>
                 <ul tabindex="0" class="top-nav-dropdown-content">
-                    <li v-for="(language, id) in languages" :key="id" @click="setLanguage(id)">
-                        <a class="top-nav-dropdown-item" :class="(getLanguage() === id) ? 'selected' : ''">
+                    <li v-for="(language, id) in languages" :key="id" @click="$store.commit('language', id)">
+                        <a class="top-nav-dropdown-item" :class="(lang === id) ? 'selected' : ''">
                             {{language.name}}
                         </a>
                     </li>
@@ -136,12 +145,12 @@ export default {
 
                     <!-- Display Mode -->
                     <div class="flex flex-wrap justify-center">
-                        <button class="top-nav-dropdown-button w-12" @click="setColorMode('normal')"
-                        :class="(getColorMode() !== 'dark') ? 'selected' : ''">
+                        <button class="top-nav-dropdown-button w-12" @click="$store.commit('color_mode', 'normal')"
+                        :class="(color_mode !== 'dark') ? 'selected' : ''">
                             <font-awesome-icon size="xl" icon="fa-solid fa-sun" />
                         </button>
-                        <button class="top-nav-dropdown-button w-12" @click="setColorMode('dark')"
-                        :class="(getColorMode() === 'dark') ? 'selected' : ''">
+                        <button class="top-nav-dropdown-button w-12" @click="$store.commit('color_mode', 'dark')"
+                        :class="(color_mode === 'dark') ? 'selected' : ''">
                             <font-awesome-icon size="xl" icon="fa-solid fa-moon" />
                         </button>
                     </div>
@@ -150,9 +159,9 @@ export default {
 
                     <!-- Language -->
                     <div class="flex flex-wrap justify-center">
-                        <button class="top-nav-dropdown-button w-12" @click="setLanguage(id)"
+                        <button class="top-nav-dropdown-button w-12" @click="$store.commit('language', id)"
                         v-for="(language, id) in languages" :key="id"
-                        :class="(getLanguage() === id) ? 'selected' : ''">
+                        :class="(lang === id) ? 'selected' : ''">
                             {{language.name_short}}
                         </button>
                     </div>

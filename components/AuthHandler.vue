@@ -36,9 +36,9 @@ export default {
 
     methods: {
         async getMyself(){ //Emits: myself(data)
+            this.$store.dispatch('init');
             //Get Tokens
-            const bearer_token = this.getBearerToken();
-            const file_token = this.getFileToken();
+            const { bearer_token } = this.$store.getters;
             if (!bearer_token){
                 this.$store.commit('myself', null);
                 return this.$emit('myself', null);
@@ -47,8 +47,8 @@ export default {
             const response = await this.callAPI('GET', 'myself');
             //If Error 401 -> Clear Tokens
             if (response._error == 401){
-                this.setBearerToken(null);
-                this.setFileToken(null);
+                this.$store.commit('bearer_token', null);
+                this.$store.commit('file_token', null);
                 return this.$emit('myself', null);
             }
             //Store myself to state
@@ -79,8 +79,8 @@ export default {
                 return this.$emit('login-failed');
             }
             //If Successful
-            this.setBearerToken(response.bearer_token);
-            this.setFileToken(response.file_token);
+            this.$store.commit('bearer_token', response.bearer_token);
+            this.$store.commit('file_token', response.file_token);
             //Close Modal
             this.hideLoginModal();
             //Get Myself
@@ -97,8 +97,8 @@ export default {
                 return this.$emit('logout-failed');
             }
             //If Successful
-            this.setBearerToken(null);
-            this.setFileToken(null);
+            this.$store.commit('bearer_token', null);
+            this.$store.commit('file_token', null);
             //Get Myself
             this.getMyself();
             return this.$emit('logged-out');

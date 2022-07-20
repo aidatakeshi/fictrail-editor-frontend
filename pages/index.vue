@@ -31,7 +31,7 @@ export default {
 </script>
 
 <template>
-    <div :class="getColorMode()">
+    <div :class="$store.getters.color_mode">
     <div class="min-h-screen bg-slate-50 dark:bg-black text-slate-900 dark:text-slate-100">
 
         <!-- Top Navigation Bar -->
