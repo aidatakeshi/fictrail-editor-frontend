@@ -65,7 +65,7 @@ export default {
                 </label>
                 <ul tabindex="0" class="top-nav-dropdown-content">
                     <li v-for="(language, id) in languages" :key="id" @click="$store.commit('language', id)">
-                        <a class="top-nav-dropdown-item" :class="(lang === id) ? 'selected' : ''">
+                        <a :class="(lang === id) ? 'selected' : ''">
                             {{language.name}}
                         </a>
                     </li>
@@ -88,13 +88,13 @@ export default {
                 </label>
                 <ul tabindex="0" class="top-nav-dropdown-content">
                     <li @click="$emit('personal-info-button')">
-                        <a class="top-nav-dropdown-item">
+                        <a>
                             <font-awesome-icon size="xl" icon="fa-solid fa-person" />
                             <span>{{s$('user/personal_info')}}</span>
                         </a>
                     </li>
                     <li @click="$emit('logout-button')">
-                        <a class="top-nav-dropdown-item">
+                        <a>
                             <font-awesome-icon size="xl" icon="fa-solid fa-arrow-right-to-bracket" />
                             <span>{{s$('general/logout')}}</span>
                         </a>
@@ -114,7 +114,7 @@ export default {
                 <div tabindex="0" class="top-nav-dropdown-card w-64">
                     <!-- Login Button -->
                     <div v-if="!$store.state.myself">
-                        <button class="top-nav-dropdown-button btn-block" @click="$emit('login-button')">
+                        <button class="top-nav-dropdown-btn btn-block" @click="$emit('login-button')">
                             <font-awesome-icon size="xl" icon="fa-solid fa-arrow-right-to-bracket" />
                             <span class="ml-2">{{s$('general/login')}}</span>
                         </button>
@@ -131,11 +131,11 @@ export default {
 
                         <hr class="my-1" />
 
-                        <button class="top-nav-dropdown-button btn-block" @click="$emit('personal-info-button')">
+                        <button class="top-nav-dropdown-btn btn-block" @click="$emit('personal-info-button')">
                             <font-awesome-icon size="xl" icon="fa-solid fa-person" />
                             <span class="ml-2">{{s$('user/personal_info')}}</span>
                         </button>
-                        <button class="top-nav-dropdown-button btn-block" @click="$emit('logout-button')">
+                        <button class="top-nav-dropdown-btn btn-block" @click="$emit('logout-button')">
                             <font-awesome-icon size="xl" icon="fa-solid fa-arrow-right-to-bracket" />
                             <span class="ml-2">{{s$('general/logout')}}</span>
                         </button>
@@ -145,11 +145,11 @@ export default {
 
                     <!-- Display Mode -->
                     <div class="flex flex-wrap justify-center">
-                        <button class="top-nav-dropdown-button w-12" @click="$store.commit('color_mode', 'normal')"
+                        <button class="top-nav-dropdown-btn w-12" @click="$store.commit('color_mode', 'normal')"
                         :class="(color_mode !== 'dark') ? 'selected' : ''">
                             <font-awesome-icon size="xl" icon="fa-solid fa-sun" />
                         </button>
-                        <button class="top-nav-dropdown-button w-12" @click="$store.commit('color_mode', 'dark')"
+                        <button class="top-nav-dropdown-btn w-12" @click="$store.commit('color_mode', 'dark')"
                         :class="(color_mode === 'dark') ? 'selected' : ''">
                             <font-awesome-icon size="xl" icon="fa-solid fa-moon" />
                         </button>
@@ -159,7 +159,7 @@ export default {
 
                     <!-- Language -->
                     <div class="flex flex-wrap justify-center">
-                        <button class="top-nav-dropdown-button w-12" @click="$store.commit('language', id)"
+                        <button class="top-nav-dropdown-btn w-12" @click="$store.commit('language', id)"
                         v-for="(language, id) in languages" :key="id"
                         :class="(lang === id) ? 'selected' : ''">
                             {{language.name_short}}

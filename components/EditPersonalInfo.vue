@@ -167,7 +167,7 @@ export default {
                     {{s$('user/column/id')}}
                 </div>
                 <div class="md:col-span-2">
-                    <div class="my-box font-semibold">{{data.id}}</div>
+                    <div class="form-box font-semibold">{{data.id}}</div>
                 </div>
             </div>
 
@@ -179,8 +179,8 @@ export default {
                 <div class="md:col-span-2">
                     <!-- Not Editing -->
                     <div class="flex" v-if="!isEditing.name">
-                        <div class="my-box grow font-semibold">{{data.name}}</div>
-                        <button @click="editName" class="btn btn-secondary -my-btn">
+                        <div class="form-box grow font-semibold">{{data.name}}</div>
+                        <button @click="editName" class="btn btn-secondary">
                             <font-awesome-icon icon="fa-solid fa-pen-to-square" />
                         </button>
                     </div>
@@ -189,9 +189,9 @@ export default {
                         <div class="flex">
                             <input type="text" id="name" v-model="editing.name"
                             :placeholder="s$('user/column/name')"
-                            @focus="error.name = null" class="my-input grow" />
+                            @focus="error.name = null" class="input grow" />
                             <button @click="submitName" :disabled="isLoading.name"
-                            class="btn btn-secondary -my-btn">
+                            class="btn btn-secondary">
                                 <span v-if="!isLoading.name">{{s$('general/submit')}}</span>
                                 <span v-else><Spinner /></span>
                             </button>
@@ -211,8 +211,8 @@ export default {
                 <div class="md:col-span-2">
                     <!-- Not Editing -->
                     <div class="flex" v-if="!isEditing.email">
-                        <div class="my-box grow font-semibold">{{data.email}}</div>
-                        <button @click="editEmail" class="btn btn-secondary -my-btn">
+                        <div class="form-box grow font-semibold">{{data.email}}</div>
+                        <button @click="editEmail" class="btn btn-secondary">
                             <font-awesome-icon icon="fa-solid fa-pen-to-square" />
                         </button>
                     </div>
@@ -221,9 +221,9 @@ export default {
                         <div class="flex">
                             <input type="text" id="email" v-model="editing.email"
                             :placeholder="s$('user/column/email')"
-                            @focus="error.email = null" class="my-input grow" />
+                            @focus="error.email = null" class="input grow" />
                             <button @click="submitEmail" :disabled="isLoading.email"
-                            class="btn btn-secondary -my-btn">
+                            class="btn btn-secondary">
                                 <span v-if="!isLoading.email">{{s$('general/submit')}}</span>
                                 <span v-else><Spinner /></span>
                             </button>
@@ -242,20 +242,20 @@ export default {
                 </div>
                 <div class="md:col-span-2">
                     <!-- Not Editing -->
-                    <div class="my-box" v-if="!isEditing.password">
-                        <button @click="editPassword" class="btn btn-secondary btn-password -my-btn">
+                    <div class="form-box" v-if="!isEditing.password">
+                        <button @click="editPassword" class="btn btn-secondary btn-password">
                             {{s$('user/password_change')}}
                         </button>
                     </div>
                     <!-- Editing -->
-                    <div class="my-box grid grid-cols-2 mb-2" v-else>
+                    <div class="form-box grid grid-cols-2 mb-2" v-else>
                         <div>
                             {{s$('user/password/old')}}
                         </div>
                         <div>
                             <input type="password" id="old_password" v-model="editing.old_password"
                             :placeholder="s$('user/password/old')"
-                            @focus="error.password = null" class="my-input-sm w-full mb-2" />
+                            @focus="error.password = null" class="input input-sm w-full mb-2" />
                         </div>
                         <div>
                             {{s$('user/password/new')}}
@@ -263,7 +263,7 @@ export default {
                         <div>
                             <input type="password" id="new_password" v-model="editing.new_password"
                             :placeholder="s$('user/password/new')"
-                            @focus="error.password = null" class="my-input-sm w-full mb-2" />
+                            @focus="error.password = null" class="input input-sm w-full mb-2" />
                         </div>
                         <div>
                             {{s$('user/password/new2')}}
@@ -271,15 +271,15 @@ export default {
                         <div>
                             <input type="password" id="new_password2" v-model="editing.new_password2"
                             :placeholder="s$('user/password/new2')"
-                            @focus="error.password = null" class="my-input-sm w-full mb-2" />
+                            @focus="error.password = null" class="input-sm w-full mb-2" />
                         </div>
                         <div class="col-span-2">
-                            <button @click="submitPassword" class="btn btn-secondary btn-password -my-btn"
+                            <button @click="submitPassword" class="btn btn-secondary btn-password"
                             :disabled="isLoading.password || !editing.old_password || !editing.new_password || !editing.new_password2">
                                 <span v-if="!isLoading.password">{{s$('general/submit')}}</span>
                                 <span v-else><Spinner /></span>
                             </button>
-                            <button @click="isEditing.password = false" class="btn btn-neutral -my-btn">
+                            <button @click="isEditing.password = false" class="btn btn-neutral">
                                 {{s$('general/cancel')}}
                             </button>
                         </div>

@@ -1,7 +1,8 @@
 <script>
 /**
  * Login Modal + Logout Handler + Bearer Token Session Handler
- * Emits: @myself(data), @logged-in, @login-failed, @logged-out, @logout-failed
+ * Emits: @myself-loading, @myself(data),
+ *        @logged-in, @login-failed, @logged-out, @logout-failed
  */
 
 import common from '../mixins/common.js';
@@ -37,9 +38,11 @@ export default {
     methods: {
         async getMyself(){ //Emits: myself(data)
             this.$store.dispatch('init');
+            this.$emit('myself-loading');
             //Get Tokens
-            const { bearer_token } = this.$store.getters;
+            const bearer_token = this.$store.getters.bearer_token;
             if (!bearer_token){
+                console.log(114514);
                 this.$store.commit('myself', null);
                 return this.$emit('myself', null);
             }
@@ -123,7 +126,7 @@ export default {
                     {{s$('login/username')}}
                 </label>
                 <input type="text" id="username" v-model="username" :placeholder="s$('login/username')"
-                @focus="error = null" class="my-input w-full" />
+                @focus="error = null" class="input w-full" />
             </div>
 
             <div class="mb-2">
@@ -131,10 +134,10 @@ export default {
                     {{s$('login/password')}}
                 </label>
                 <input type="password" id="password" v-model="password" :placeholder="s$('login/password')"
-                @focus="error = null" class="my-input w-full" />
+                @focus="error = null" class="input w-full" />
             </div>
 
-            <button class="btn btn-primary btn-block -my-btn"
+            <button class="btn btn-primary btn-block"
             :disabled="!username || !password || isLoading" @click="submitLogin">
                 <span v-if="!isLoading">{{s$('general/submit')}}</span>
                 <span v-else><Spinner /></span>

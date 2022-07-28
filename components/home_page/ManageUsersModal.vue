@@ -162,7 +162,7 @@ export default {
             <!-- Pagination -->
             <div class="flex flex-wrap items-center">
                 <button @click="newUserModal()"
-                class="btn btn-secondary btn-sm -my-btn my-2">
+                class="btn btn-secondary btn-sm my-2">
                     <font-awesome-icon icon="fa-solid fa-plus" />
                     <span class="ml-2">{{s$('user/new_user')}}</span>
                 </button>
@@ -218,7 +218,7 @@ export default {
                             <!-- Edit -->
                             <td class="text-center w-6">
                                 <button @click="editUserModal(user)"
-                                class="btn btn-sm btn-secondary -my-btn -my-1">
+                                class="btn btn-sm btn-secondary -my-1">
                                     <font-awesome-icon icon="fa-solid fa-pen-to-square" />
                                 </button>
                             </td>
@@ -245,7 +245,7 @@ export default {
                 </label>
                 <input type="text" id="id" v-model="edit_user.data.id"
                 :placeholder="s$('user/column/id')" :disabled="!edit_user.isNew"
-                @focus="resetUserModalErrors" class="my-input w-full" />
+                @focus="resetUserModalErrors" class="input w-full" />
                 <label class="label py-0 text-error">
                     {{edit_user.error.id}}
                 </label>
@@ -257,7 +257,7 @@ export default {
                 </label>
                 <input type="text" id="name" v-model="edit_user.data.name"
                 :placeholder="s$('user/column/name')"
-                @focus="resetUserModalErrors" class="my-input w-full" />
+                @focus="resetUserModalErrors" class="input w-full" />
                 <label class="label py-0 text-error">
                     {{edit_user.error.name}}
                 </label>
@@ -269,7 +269,7 @@ export default {
                 </label>
                 <input type="text" id="email" v-model="edit_user.data.email"
                 :placeholder="s$('user/column/email')"
-                @focus="resetUserModalErrors" class="my-input w-full" />
+                @focus="resetUserModalErrors" class="input w-full" />
                 <label class="label py-0 text-error">
                     {{edit_user.error.email}}
                 </label>
@@ -281,7 +281,7 @@ export default {
                 </label>
                 <input type="password" id="password" v-model="edit_user.data.password"
                 :placeholder="edit_user.isNew ? s$('user/password') : s$('user/password_change_needed')"
-                @focus="resetUserModalErrors" class="my-input w-full" />
+                @focus="resetUserModalErrors" class="input w-full" />
                 <label class="label py-0 text-error">
                     {{edit_user.error.password}}
                 </label>
@@ -312,7 +312,7 @@ export default {
             </div>
 
             <!-- Submit Button -->
-            <button class="btn btn-primary btn-block -my-btn"
+            <button class="btn btn-primary btn-block"
             :disabled="edit_user.isLoading" @click="submitUser">
                 <span v-if="!edit_user.isLoading">{{s$('general/submit')}}</span>
                 <span v-else><Spinner /></span>
@@ -321,7 +321,7 @@ export default {
             <!-- Remove Button -->
             <div class="text-center mt-2"
             v-if="!edit_user.isNew && !edit_user.isMyself">
-                <button class="btn btn-neutral btn-sm -my-btn"
+                <button class="btn btn-neutral btn-sm"
                 :disabled="edit_user.isLoading" @click="removeUser">
                     <span v-if="!edit_user.isLoading">
                         <font-awesome-icon icon="fa-solid fa-trash" />

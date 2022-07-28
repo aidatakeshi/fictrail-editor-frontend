@@ -1,0 +1,142 @@
+/*
+    Info Panel:
+    Desktop: Left; Mobile: Bottom
+    Three States: Close, Semi-open (Mobile Only), Open
+*/
+.info-panel{
+    @apply absolute;
+    /* Close Mode: 3rem height (excluding padding) */
+    @apply md:px-2 md:pt-2 md:pb-14 h-12 md:h-28; /* 28=2+12+14 */
+    /* Transition */
+    @apply transition-height;
+    /* Positioning for Mobile (Default: Close Mode) */
+    @apply left-0 right-0 top-auto bottom-0;
+    /* Positioning for Desktop */
+    @apply md:left-0 md:right-auto md:top-0 md:bottom-auto md:w-104;
+}
+.info-panel.close{}
+.info-panel.semi-open{
+    /* Semi-Open Mode (or Full-Open for Desktop) */
+    @apply h-1/2 md:h-full;
+}
+.info-panel.open{
+    /* Full-Open Mode */
+    @apply h-full;
+}
+.info-panel-box{
+    /* Misc */
+    @apply h-full;
+    /* Background & Text Color */
+    @apply bg-white dark:bg-black text-slate-900 dark:text-slate-100;
+    /* Shadow & Round Corner */
+    @apply shadow-md rounded-t-lg md:rounded-lg;
+    /* Place Header & Body in Vertical Flex Mode */
+    @apply flex flex-col;
+}
+/* Info Panel Header */
+.info-panel .info-panel-header{
+    /* Don't be 'compressed' under info-panel-box flex */
+    @apply flex-shrink-0;
+    /* Background & Text Color */
+    @apply bg-parsley text-white;
+    /* Round Corner */
+    @apply rounded-t-lg;
+    /* Always 3rem height */
+    @apply h-12 px-2;
+    /* Flex */
+    @apply flex items-center justify-between;
+}
+.info-panel.close .info-panel-header{
+    @apply md:rounded-lg;
+}
+/* Info Panel Body: Hide at Close Mode */
+.info-panel .info-panel-body{
+    @apply overflow-y-auto p-2 md:mb-2;
+    /* Line at Top */
+    @apply border-t border-slate-200 dark:border-slate-800;
+}
+.info-panel.close .info-panel-body{
+    @apply hidden;
+}
+/* Info Panel Title */
+.info-panel-title{
+    @apply text-lg truncate mr-2;
+}
+
+/*
+    Editing Menu:
+    Desktop I: Top, next to Info Panel. Buttons Aligning Right (Wrap if overflow)
+    Desktop II: Bottom-Left
+    Mobile: Top-left, next to Info Panel (popup-up menu).
+*/
+.editing-desktop-top-menu{
+    @apply p-2;
+    /* Positioning */
+    @apply absolute left-102 right-0 top-0;
+    /* Flex Display Items; Hidden at Mobile */
+    @apply hidden md:flex md:flex-wrap md:flex-row-reverse md:gap-2;
+}
+.editing-desktop-bottom-menu{
+    @apply p-2;
+    /* Positioning */
+    @apply absolute left-0 right-0 bottom-0;
+    /* Flex Display Items; Hidden at Mobile */
+    @apply hidden md:flex md:flex-wrap md:gap-2;
+}
+.editing-mobile-menu{
+    @apply p-2;
+    /* Positioning */
+    @apply absolute left-0 right-0 top-0;
+    /* Flex Display Items; Hidden at Desktop */
+    @apply flex flex-wrap gap-2 md:hidden;
+}
+/* Menu Buttons */
+.editing-desktop-menu-btn-1{
+    @apply btn btn-sm normal-case rounded-full shadow-md border-none;
+    @apply color__editing-menu-btn-1;
+}
+.editing-desktop-menu-btn-2{
+    @apply btn btn-sm normal-case rounded-full shadow-md border-none;
+    @apply color__editing-menu-btn-2;
+}
+.editing-mobile-menu-btn-1{
+    @apply btn btn-sm normal-case rounded shadow-md border-none;
+    @apply color__editing-menu-btn-1;
+}
+.editing-mobile-menu-btn-2{
+    @apply btn btn-sm normal-case rounded shadow-md border-none;
+    @apply color__editing-menu-btn-2;
+}
+/* Menu Dropdown */
+.editing-desktop-menu-dropdown{
+    @apply dropdown-content menu p-2 shadow rounded-xl;
+    @apply color__editing-menu-dropdown-bg;
+}
+.editing-desktop-menu-dropdown a {
+    @apply normal-case whitespace-nowrap rounded-lg;
+    @apply px-4 py-2;
+    @apply color__editing-menu-dropdown-btn;
+}
+.editing-desktop-menu-dropdown a.selected{
+    @apply color__editing-menu-dropdown-btn-selected;
+}
+
+/* Shared Color Schemes */
+.color__editing-menu-btn-1{
+    @apply bg-parsley hover:bg-parsley-700 text-white;
+}
+.color__editing-menu-btn-2{
+    @apply bg-slate-200 hover:bg-slate-300 text-slate-700;
+    @apply dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-white;
+}
+.color__editing-menu-dropdown-bg {
+    @apply bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-slate-100;
+}
+.color__editing-menu-dropdown-btn {
+    @apply text-black dark:text-white;
+    @apply hover:bg-slate-300 dark:hover:bg-slate-700;
+    @apply active:bg-slate-400 dark:active:bg-slate-600;
+}
+.color__editing-menu-dropdown-btn-selected{
+    @apply bg-slate-500 hover:bg-slate-500 text-white;
+}

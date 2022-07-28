@@ -161,12 +161,12 @@ export default {
             <!-- Pagination -->
             <div class="flex flex-wrap items-center gap-1">
                 <button v-if="can_create_new_project" @click="newProjectModal()"
-                class="btn btn-secondary btn-sm -my-btn my-2">
+                class="btn btn-secondary btn-sm my-2">
                     <font-awesome-icon icon="fa-solid fa-plus" />
                     <span class="ml-2">{{s$('project/new_project')}}</span>
                 </button>
                 <button v-if="is_root_user" @click="$refs.manage_users_modal.show()"
-                class="btn btn-neutral btn-sm -my-btn my-2">
+                class="btn btn-neutral btn-sm my-2">
                     <font-awesome-icon icon="fa-solid fa-people-group" />
                     <span class="ml-2">{{s$('user/manage_users')}}</span>
                 </button>
@@ -202,7 +202,7 @@ export default {
                             <!-- ID -->
                             <td @click="$router.push(`/${project.id}`)" class="text-center">
                                 <nuxt-link :to="`/${project.id}`">
-                                    <span class="my-id">{{project.id}}</span>
+                                    <span class="id">{{project.id}}</span>
                                 </nuxt-link>
                             </td>
                             <!-- My Rights -->
@@ -221,14 +221,14 @@ export default {
                             <template v-if="$store.state.myself">
                                 <td class="text-center w-6">
                                     <button @click="editProjectModal(project)"
-                                    class="btn btn-sm btn-secondary -my-btn -my-1"
+                                    class="btn btn-sm btn-secondary -my-1"
                                     :disabled="!['root', 'owner', 'editor'].includes(project.my_rights)">
                                         <font-awesome-icon icon="fa-solid fa-pen-to-square" />
                                     </button>
                                 </td>
                                 <td class="text-center w-6">
                                     <button @click="$refs.project_assignment_modal.show(project)"
-                                    class="btn btn-sm btn-secondary -my-btn -my-1"
+                                    class="btn btn-sm btn-secondary -my-1"
                                     :disabled="!['root', 'owner'].includes(project.my_rights)">
                                         <font-awesome-icon icon="fa-solid fa-user-gear" />
                                     </button>
@@ -257,7 +257,7 @@ export default {
                 </label>
                 <input type="text" id="id" v-model="edit_project.data.id"
                 :placeholder="s$('project/edit_project/id')" :disabled="!edit_project.isNew"
-                @focus="resetProjectModalErrors" class="my-input w-full" />
+                @focus="resetProjectModalErrors" class="input w-full" />
                 <label class="label py-0 text-error">
                     {{edit_project.error.id}}
                 </label>
@@ -269,7 +269,7 @@ export default {
                 </label>
                 <input type="text" id="name" v-model="edit_project.data.name"
                 :placeholder="s$('project/edit_project/name')"
-                @focus="resetProjectModalErrors" class="my-input w-full" />
+                @focus="resetProjectModalErrors" class="input w-full" />
                 <label class="label py-0 text-error">
                     {{edit_project.error.name}}
                 </label>
@@ -283,7 +283,7 @@ export default {
             </div>
 
             <!-- Submit Button -->
-            <button class="btn btn-primary btn-block -my-btn"
+            <button class="btn btn-primary btn-block"
             :disabled="edit_project.isLoading" @click="submitProjectModal">
                 <span v-if="!edit_project.isLoading">{{s$('general/submit')}}</span>
                 <span v-else><Spinner /></span>
@@ -292,7 +292,7 @@ export default {
             <!-- Remove Button -->
             <div class="text-center mt-2"
             v-if="!edit_project.isNew && edit_project.data.my_rights != 'editor'">
-                <button class="btn btn-neutral btn-sm -my-btn"
+                <button class="btn btn-neutral btn-sm"
                 :disabled="edit_project.isLoading" @click="removeProjectModal">
                     <span v-if="!edit_project.isLoading">
                         <font-awesome-icon icon="fa-solid fa-trash" />

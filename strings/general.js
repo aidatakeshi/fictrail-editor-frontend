@@ -29,6 +29,11 @@ exports.strings = {
         "zh-hk": "取消",
         "zh-cn": "取消",
     },
+    "return": {
+        "en":    "Return",
+        "zh-hk": "返回",
+        "zh-cn": "返回",
+    },
     "loading": {
         "en":    "Loading...",
         "zh-hk": "載入中...",

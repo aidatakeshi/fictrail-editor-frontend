@@ -65,7 +65,7 @@ exports.strings = {
         "zh-cn": "密码",
     },
     "password_change": {
-        "en":    "Enter if password change needed",
+        "en":    "Change Password",
         "zh-hk": "更改密碼",
         "zh-cn": "更改密码",
     },

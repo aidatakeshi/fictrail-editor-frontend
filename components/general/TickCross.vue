@@ -17,18 +17,6 @@ export default {
     props: {
         value: null,
     },
-
-    data: () => ({
-    }),
-
-    methods: {
-    },
-
-    computed: {
-    },
-
-    watch: {
-    }
 }
 </script>
 

@@ -35,8 +35,9 @@ export default {
             //Set Base URL
             this.$axios.setBaseURL(process.env.API_BASE_URL);
             //Handle Bearer Token
-            if (bearerTokenRequired){
-                this.$axios.setToken(this.$store.getters.bearer_token || "", "Bearer");
+            const bearer_token = this.$store.getters.bearer_token;
+            if (bearerTokenRequired && bearer_token){
+                this.$axios.setToken(bearer_token, "Bearer");
             }else{
                 this.$axios.setToken(false);
             }

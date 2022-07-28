@@ -1,4 +1,7 @@
 <script>
+/*
+    Project List Page
+*/
 import common from '../mixins/common.js';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -10,7 +13,7 @@ import TopNavHomePage from '../components/home_page/TopNavHomePage';
 import ProjectList from '../components/home_page/ProjectList';
 
 export default {
-    name: 'PageMain',
+    name: 'PageProjectList',
     mixins: [common],
     components: {
         FontAwesomeIcon,
@@ -32,7 +35,7 @@ export default {
 
 <template>
     <div :class="$store.getters.color_mode">
-    <div class="min-h-screen bg-slate-50 dark:bg-black text-slate-900 dark:text-slate-100">
+    <div class="min-h-screen bg-white dark:bg-black text-slate-900 dark:text-slate-100">
 
         <!-- Top Navigation Bar -->
         <TopNavHomePage
@@ -41,7 +44,7 @@ export default {
             @personal-info-button="$refs.edit_personal_info.show()"
         />
 
-        <!-- AuthHandler -->
+        <!-- Auth Handler -->
         <AuthHandler ref="auth_handler" @myself="onAuthHandlerResponse" />
 
         <!-- Edit Personal Info -->

@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+
 module.exports = {
     darkMode: 'class',
     content: [],
@@ -32,6 +33,14 @@ module.exports = {
                     '900': '#101051'
                 },
             },
+            transitionProperty: {
+                'height': 'height',
+            },
+            spacing: {
+                '100': '25rem',
+                '102': '25.5rem',
+                '104': '26rem',
+            }
         },
     },
     daisyui: {

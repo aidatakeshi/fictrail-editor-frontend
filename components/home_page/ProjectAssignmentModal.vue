@@ -137,7 +137,7 @@ export default {
         <Modal wide ref="_modal" close-at-bg>
             <div slot="header">
                 <span>{{project.name}}</span>
-                <span class="my-id">{{project.id}}</span>
+                <span class="id">{{project.id}}</span>
             </div>
 
             <!-- Public Project Info -->
@@ -146,7 +146,7 @@ export default {
             <!-- Pagination -->
             <div class="flex flex-wrap items-center">
                 <button @click="newAssignmentModal()"
-                class="btn btn-secondary btn-sm -my-btn my-2">
+                class="btn btn-secondary btn-sm my-2">
                     <font-awesome-icon icon="fa-solid fa-plus" />
                     <span class="ml-2">{{s$('project/project_assign/assign_user')}}</span>
                 </button>
@@ -188,7 +188,7 @@ export default {
                             <td class="text-center w-6">
                                 <button @click="editAssignmentModal(user)"
                                 :disabled="($store.state.myself||{}).id == user.id"
-                                class="btn btn-sm btn-secondary -my-btn -my-1">
+                                class="btn btn-sm btn-secondary -my-1">
                                     <font-awesome-icon icon="fa-solid fa-pen-to-square" />
                                 </button>
                             </td>
@@ -215,14 +215,14 @@ export default {
                 </label>
                 <input type="text" id="user_id" v-model="user_id"
                 :placeholder="s$('project/project_assign/user_id')"
-                @focus="error = null" class="my-input w-full" />
+                @focus="error = null" class="input w-full" />
             </div>
 
             <div>
                 <label class="label py-0">
                     {{s$('project/project_assign/rights')}}
                 </label>
-                <div class="my-box mb-2">
+                <div class="form-box mb-2">
                     <div class="flex items-center"
                     v-for="v in ['owner', 'editor', 'viewer']" :key="v">
                         <input type="radio" :id="`rights_${v}`" @focus="error = null"
@@ -236,7 +236,7 @@ export default {
             </div>
 
             <!-- Submit Button -->
-            <button class="btn btn-primary btn-block -my-btn"
+            <button class="btn btn-primary btn-block"
             :disabled="isLoading || !user_id || !rights" @click="submitAssignment">
                 <span v-if="!isLoading">{{s$('general/submit')}}</span>
                 <span v-else><Spinner /></span>
@@ -244,7 +244,7 @@ export default {
 
             <!-- Remove Button -->
             <div class="text-center mt-2" v-if="!isNew">
-                <button class="btn btn-neutral btn-sm -my-btn" :disabled="isLoading" @click="removeAssignment">
+                <button class="btn btn-neutral btn-sm" :disabled="isLoading" @click="removeAssignment">
                     <span v-if="!isLoading">
                         <font-awesome-icon icon="fa-solid fa-trash" />
                         <span class="ml-2">{{s$('project/remove')}}</span>

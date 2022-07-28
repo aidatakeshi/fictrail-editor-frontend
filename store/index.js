@@ -11,25 +11,23 @@ export const state = () => ({
 export const getters = {
     bearer_token: (state) => state.bearer_token,
     file_token: (state) => state.file_token,
-    language: (state) => (state.language !== null) ? state.language : 'en',
-    color_mode: (state) => (state.color_mode !== null) ? state.color_mode : 'normal',
-    //
-    myself: (state) => state.myself,
+    language: (state) => state.language || 'en',
+    color_mode: (state) => state.color_mode || 'normal',
 };
 
 export const mutations = {
     //
     bearer_token(state, value) {
-        state.bearer_token = value;
+        saveParam(state, 'bearer_token', value);
     },
     file_token(state, value) {
-        state.file_token = value;
+        saveParam(state, 'file_token', value);
     },
     language(state, value) {
-        state.language = value;
+        saveParam(state, 'language', value);
     },
     color_mode(state, value) {
-        state.color_mode = value;
+        saveParam(state, 'color_mode', value);
     },
     //
     myself(state, value){
@@ -49,4 +47,18 @@ export const actions = {
             }
         }
     },
+};
+
+/**
+ * Shared Functions
+ */
+const saveParam = (state, field, value) => {
+    state[field] = value;
+    if (process.client){
+        if (value){
+            localStorage.setItem(field, value);
+        }else{
+            localStorage.removeItem(field);
+        }
+    }
 };
