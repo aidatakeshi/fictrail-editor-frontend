@@ -98,7 +98,7 @@ export default {
             //Call API
             const isNew = this.edit_project.isNew;
             const method = isNew ? 'POST' : 'PUT';
-            const url = isNew ? 'project' : `project/${encodeURIComponent(this.edit_project.data.id)}`;
+            const url = isNew ? 'project' : `project_list/${encodeURIComponent(this.edit_project.data.id)}`;
             this.edit_project.isLoading = true;
             const response = await this.callAPI(method, url, this.edit_project.data);
             this.edit_project.isLoading = false;
@@ -112,37 +112,37 @@ export default {
                         }
                     }
                 }else{
-                    this.$refs.toasts.make(this.s$('project/toasts/submit_error'), 'error');
+                    this.$refs.toasts.make(this.s$('project_list/toasts/submit_error'), 'error');
                 }
                 return false;
             }
             //If No Error
             this.$refs.edit_project_modal.hide();
             if (isNew){
-                this.$refs.toasts.make(this.s$('project/toasts/new_success'), 'success');
+                this.$refs.toasts.make(this.s$('project_list/toasts/new_success'), 'success');
             }else{
-                this.$refs.toasts.make(this.s$('project/toasts/edit_success'), 'success');
+                this.$refs.toasts.make(this.s$('project_list/toasts/edit_success'), 'success');
             }
             await this.loadData(this.page);
         },
         async removeProjectModal(){
-            const p = prompt(this.s$('project/remove/confirm'));
+            const p = prompt(this.s$('project_list/remove/confirm'));
             if (p !== this.edit_project.data.id){
-                this.$refs.toasts.make(this.s$('project/toasts/confirmation_failed'), 'error');
+                this.$refs.toasts.make(this.s$('project_list/toasts/confirmation_failed'), 'error');
                 return false;
             }
             //Proceed Removal
             this.edit_project.isLoading = true;
-            const response = await this.callAPI('DELETE', `project/${encodeURIComponent(this.edit_project.data.id)}`);
+            const response = await this.callAPI('DELETE', `project_list/${encodeURIComponent(this.edit_project.data.id)}`);
             this.edit_project.isLoading = false;
             //If Error
             if (response._error){
-                this.$refs.toasts.make(this.s$('project/toasts/submit_error'), 'error');
+                this.$refs.toasts.make(this.s$('project_list/toasts/submit_error'), 'error');
                 return false;
             }
             //If No Error
             this.$refs.edit_project_modal.hide();
-            this.$refs.toasts.make(this.s$('project/toasts/remove_success'), 'success');
+            this.$refs.toasts.make(this.s$('project_list/toasts/remove_success'), 'success');
             await this.loadData(this.page);
         },
     },
@@ -152,7 +152,7 @@ export default {
 <template>
     <div>
         <h3 class="text-2xl lg:text-3xl font-semibold my-2">
-            {{s$('project/list_title')}}
+            {{s$('project_list/list_title')}}
         </h3>
 
         <!-- Results -->
@@ -163,7 +163,7 @@ export default {
                 <button v-if="can_create_new_project" @click="newProjectModal()"
                 class="btn btn-secondary btn-sm my-2">
                     <font-awesome-icon icon="fa-solid fa-plus" />
-                    <span class="ml-2">{{s$('project/new_project')}}</span>
+                    <span class="ml-2">{{s$('project_list/new_project')}}</span>
                 </button>
                 <button v-if="is_root_user" @click="$refs.manage_users_modal.show()"
                 class="btn btn-neutral btn-sm my-2">
@@ -178,13 +178,13 @@ export default {
                 <table class="my-table">
                     <thead>
                         <tr>
-                            <th>{{s$('project/column/project')}}</th>
-                            <th>{{s$('project/column/id')}}</th>
-                            <th>{{s$('project/column/my_rights')}}</th>
-                            <th>{{s$('project/column/created_by')}}</th>
+                            <th>{{s$('project_list/column/project')}}</th>
+                            <th>{{s$('project_list/column/id')}}</th>
+                            <th>{{s$('project_list/column/my_rights')}}</th>
+                            <th>{{s$('project_list/column/created_by')}}</th>
                             <template v-if="$store.state.myself">
-                                <th>{{s$('project/column/edit')}}</th>
-                                <th>{{s$('project/column/users')}}</th>
+                                <th>{{s$('project_list/column/edit')}}</th>
+                                <th>{{s$('project_list/column/users')}}</th>
                             </template>
                         </tr>
                     </thead>
@@ -195,7 +195,7 @@ export default {
                                 <nuxt-link :to="`/${project.id}`">
                                     <span class="font-semibold">{{project.name}}</span>
                                     <div class="badge badge-accent text-white badge-sm md:badge-md" v-if="project.is_public">
-                                        {{s$('project/public')}}
+                                        {{s$('project_list/public')}}
                                     </div>
                                 </nuxt-link>
                             </td>
@@ -249,14 +249,14 @@ export default {
 
         <!-- New / Edit Project Modal -->
         <Modal narrow ref="edit_project_modal" close-at-bg
-        :title="s$(`project/${edit_project.isNew ? 'new_project' : 'edit_project'}`)">
+        :title="s$(`project_list/${edit_project.isNew ? 'new_project' : 'edit_project'}`)">
 
             <div class="mb-2">
                 <label class="label py-0" for="id">
-                    {{s$('project/edit_project/id')}}
+                    {{s$('project_list/edit_project/id')}}
                 </label>
                 <input type="text" id="id" v-model="edit_project.data.id"
-                :placeholder="s$('project/edit_project/id')" :disabled="!edit_project.isNew"
+                :placeholder="s$('project_list/edit_project/id')" :disabled="!edit_project.isNew"
                 @focus="resetProjectModalErrors" class="input w-full" />
                 <label class="label py-0 text-error">
                     {{edit_project.error.id}}
@@ -265,10 +265,10 @@ export default {
 
             <div class="mb-2">
                 <label class="label py-0" for="name">
-                    {{s$('project/edit_project/name')}}
+                    {{s$('project_list/edit_project/name')}}
                 </label>
                 <input type="text" id="name" v-model="edit_project.data.name"
-                :placeholder="s$('project/edit_project/name')"
+                :placeholder="s$('project_list/edit_project/name')"
                 @focus="resetProjectModalErrors" class="input w-full" />
                 <label class="label py-0 text-error">
                     {{edit_project.error.name}}
@@ -278,7 +278,7 @@ export default {
             <div class="mb-2 flex items-center">
                 <input type="checkbox" id="is_public" class="checkbox" v-model="edit_project.data.is_public" />
                 <label class="label py-0" for="is_public">
-                    {{s$('project/edit_project/is_public')}}
+                    {{s$('project_list/edit_project/is_public')}}
                 </label>
             </div>
 
@@ -296,7 +296,7 @@ export default {
                 :disabled="edit_project.isLoading" @click="removeProjectModal">
                     <span v-if="!edit_project.isLoading">
                         <font-awesome-icon icon="fa-solid fa-trash" />
-                        <span class="ml-2">{{s$('project/remove')}}</span>
+                        <span class="ml-2">{{s$('project_list/remove')}}</span>
                     </span>
                     <span v-else><Spinner /></span>
                 </button>

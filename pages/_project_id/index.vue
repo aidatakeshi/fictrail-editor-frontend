@@ -8,6 +8,7 @@ import common from '../../mixins/common.js';
 import editor_load_data from '../../mixins/editor_load_data.js';
 import editor_listeners from '../../mixins/editor_listeners.js';
 import AuthHandler from '../../components/AuthHandler';
+import EditPersonalInfo from '../../components/EditPersonalInfo';
 import MainEditor from '../../components/project_editor/MainEditor';
 import Spinner from '../../components/general/Spinner';
 
@@ -19,7 +20,7 @@ export default {
         editor_load_data, editor_listeners,
     ],
     components: {
-        AuthHandler, MainEditor,
+        AuthHandler, EditPersonalInfo, MainEditor,
         Spinner,
     },
 
@@ -82,11 +83,6 @@ export default {
     <div :class="$store.getters.color_mode">
     <div class="min-h-screen bg-white dark:bg-black text-slate-900 dark:text-slate-100">
 
-        <!-- Auth Handler -->
-        <AuthHandler ref="auth_handler"
-            @myself-loading="onAuthHandlerLoading" @myself="onAuthHandlerResponse"
-        />
-
         <!-- Loading / Error Box -->
         <div class="grid place-items-center h-screen" v-if="is_loading || error">
             <div class="bg-slate-100 dark:bg-slate-900 rounded-2xl w-full max-w-lg px-2 py-8">
@@ -115,7 +111,19 @@ export default {
         </div>
 
         <!-- Finish Loading -->
-        <MainEditor v-else />
+        <MainEditor v-else
+            @login-button="$refs.auth_handler.showLoginModal()"
+            @logout-button="$refs.auth_handler.handleLogout()"
+            @personal-info-button="$refs.edit_personal_info.show()"
+        />
+
+        <!-- Edit Personal Info -->
+        <EditPersonalInfo ref="edit_personal_info" />
+
+        <!-- Auth Handler -->
+        <AuthHandler ref="auth_handler"
+            @myself-loading="onAuthHandlerLoading" @myself="onAuthHandlerResponse"
+        />
 
     </div>
     </div>

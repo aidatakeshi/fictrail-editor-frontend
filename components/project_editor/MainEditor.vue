@@ -3,13 +3,14 @@
     Project Main Editor
 */
 import common from '../../mixins/common.js';
-import EditPersonalInfo from '../EditPersonalInfo';
+import InfoPanel from './InfoPanel';
+import MenuBars from './MenuBars';
 
 export default {
     name: 'MainEditor',
     mixins: [common],
     components: {
-        EditPersonalInfo,
+        InfoPanel, MenuBars,
     },
 
     data: () => ({
@@ -26,6 +27,13 @@ export default {
 
 <template>
     <div>
-        {{$store.state.p_display}}
+        <!-- Info Panel -->
+        <InfoPanel />
+        <!-- Menu Bars -->
+        <MenuBars
+            @login-button="$emit('login-button')"
+            @logout-button="$emit('logout-button')"
+            @personal-info-button="$emit('personal-info-button')"
+        />
     </div>
 </template>

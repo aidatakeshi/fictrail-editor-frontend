@@ -4,7 +4,7 @@
  */
 
 import common from '../../mixins/common.js';
-import _languages from '../../strings/_languages.js';
+import _strings from '../../strings/_strings.js';
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
@@ -22,7 +22,7 @@ export default {
     components: { FontAwesomeIcon },
 
     data: () => ({
-        languages: _languages.languages,
+        languages: _strings.languages,
     }),
 
     computed: {

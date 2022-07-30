@@ -74,7 +74,7 @@
     /* Positioning */
     @apply absolute left-102 right-0 top-0;
     /* Flex Display Items; Hidden at Mobile */
-    @apply hidden md:flex md:flex-wrap md:flex-row-reverse md:gap-2;
+    @apply hidden md:flex md:flex-wrap md:justify-end md:gap-2;
 }
 .editing-desktop-bottom-menu{
     @apply p-2;
@@ -95,48 +95,63 @@
     @apply btn btn-sm normal-case rounded-full shadow-md border-none;
     @apply color__editing-menu-btn-1;
 }
+.editing-desktop-menu-btn-1 svg{
+    @apply color__editing-menu-btn-1-svg;
+}
 .editing-desktop-menu-btn-2{
     @apply btn btn-sm normal-case rounded-full shadow-md border-none;
     @apply color__editing-menu-btn-2;
+}
+.editing-desktop-menu-btn-2 svg{
+    @apply color__editing-menu-btn-2-svg;
 }
 .editing-mobile-menu-btn-1{
     @apply btn btn-sm normal-case rounded shadow-md border-none;
     @apply color__editing-menu-btn-1;
 }
+.editing-mobile-menu-btn-1 svg{
+    @apply color__editing-menu-btn-1-svg;
+}
 .editing-mobile-menu-btn-2{
     @apply btn btn-sm normal-case rounded shadow-md border-none;
     @apply color__editing-menu-btn-2;
 }
+.editing-mobile-menu-btn-2 svg{
+    @apply color__editing-menu-btn-2-svg;
+}
 /* Menu Dropdown */
 .editing-desktop-menu-dropdown{
     @apply dropdown-content menu p-2 shadow rounded-xl;
-    @apply color__editing-menu-dropdown-bg;
+    @apply bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-slate-100;
 }
 .editing-desktop-menu-dropdown a {
     @apply normal-case whitespace-nowrap rounded-lg;
     @apply px-4 py-2;
-    @apply color__editing-menu-dropdown-btn;
+    @apply text-slate-900 dark:text-slate-100;
+    @apply hover:bg-slate-300 dark:hover:bg-slate-700;
+    @apply active:bg-slate-400 dark:active:bg-slate-600;
+}
+.editing-desktop-menu-dropdown svg{
+    @apply fill-slate-900 dark:fill-slate-100;
 }
 .editing-desktop-menu-dropdown a.selected{
-    @apply color__editing-menu-dropdown-btn-selected;
+    @apply bg-slate-500 hover:bg-slate-500 text-white;
+}
+.editing-desktop-menu-dropdown .selected svg{
+    @apply fill-white;
 }
 
 /* Shared Color Schemes */
 .color__editing-menu-btn-1{
     @apply bg-parsley hover:bg-parsley-700 text-white;
 }
+.color__editing-menu-btn-1-svg{
+    @apply fill-white;
+}
 .color__editing-menu-btn-2{
-    @apply bg-slate-200 hover:bg-slate-300 text-slate-700;
-    @apply dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-white;
+    @apply bg-slate-200 hover:bg-slate-300 text-slate-900;
+    @apply dark:bg-slate-700 dark:hover:bg-slate-600 dark:text-slate-100;
 }
-.color__editing-menu-dropdown-bg {
-    @apply bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-slate-100;
-}
-.color__editing-menu-dropdown-btn {
-    @apply text-black dark:text-white;
-    @apply hover:bg-slate-300 dark:hover:bg-slate-700;
-    @apply active:bg-slate-400 dark:active:bg-slate-600;
-}
-.color__editing-menu-dropdown-btn-selected{
-    @apply bg-slate-500 hover:bg-slate-500 text-white;
+.color__editing-menu-btn-2-svg{
+    @apply fill-slate-900 dark:fill-slate-100;
 }

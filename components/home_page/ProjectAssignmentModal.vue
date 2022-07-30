@@ -59,7 +59,7 @@ export default {
         //Load Assignment Data
         async loadData(_page = 1){
             this.$refs.toasts.setLoading(true);
-            const url = `project/${encodeURIComponent(this.project.id)}/assignment`;
+            const url = `project_list/${encodeURIComponent(this.project.id)}/assignment`;
             const response = await this.callAPI('GET', url, {_page});
             this.$refs.toasts.setLoading(false);
             if (response._error){
@@ -93,23 +93,23 @@ export default {
             const _project_id = encodeURIComponent(this.project.id);
             const _user_id = encodeURIComponent(this.user_id);
             const _rights = encodeURIComponent(this.rights);
-            const url = `project/${_project_id}/assign?user_id=${_user_id}&rights=${_rights}`;
+            const url = `project_list/${_project_id}/assign?user_id=${_user_id}&rights=${_rights}`;
             const response = await this.callAPI('PUT', url);
             //If Error
             if (response._error){
                 if (response.error == 'user_not_found'){
-                    this.error = this.s$('project/user_not_found');
+                    this.error = this.s$('project_list/user_not_found');
                 }else{
-                    this.$refs.toasts.make(this.s$('project/toasts/submit_error'), 'error');
+                    this.$refs.toasts.make(this.s$('project_list/toasts/submit_error'), 'error');
                 }
                 return false;
             }
             //If No Error
             this.$refs.assignment_modal.hide();
             if (this.isNew){
-                this.$refs.toasts.make(this.s$('project/toasts/user_assign_new'), 'success');
+                this.$refs.toasts.make(this.s$('project_list/toasts/user_assign_new'), 'success');
             }else{
-                this.$refs.toasts.make(this.s$('project/toasts/user_assign_edit'), 'success');
+                this.$refs.toasts.make(this.s$('project_list/toasts/user_assign_edit'), 'success');
             }
             await this.loadData(this.page);
         },
@@ -117,15 +117,15 @@ export default {
         async removeAssignment(){
             const _project_id = encodeURIComponent(this.project.id);
             const _user_id = encodeURIComponent(this.user_id);
-            const url = `project/${_project_id}/unassign?user_id=${_user_id}`;
+            const url = `project_list/${_project_id}/unassign?user_id=${_user_id}`;
             const response = await this.callAPI('PUT', url);
             //If Error
             if (response._error){
-                this.$refs.toasts.make(this.s$('project/toasts/submit_error'), 'error');
+                this.$refs.toasts.make(this.s$('project_list/toasts/submit_error'), 'error');
             }
             //If No Error
             this.$refs.assignment_modal.hide();
-            this.$refs.toasts.make(this.s$('project/toasts/user_assign_remove'), 'success');
+            this.$refs.toasts.make(this.s$('project_list/toasts/user_assign_remove'), 'success');
             await this.loadData(this.page);
         },
     },
@@ -141,14 +141,14 @@ export default {
             </div>
 
             <!-- Public Project Info -->
-            <Alert type="info" :content="s$('project/project_assign/info_public')" v-if="project.is_public" />
+            <Alert type="info" :content="s$('project_list/project_assign/info_public')" v-if="project.is_public" />
 
             <!-- Pagination -->
             <div class="flex flex-wrap items-center">
                 <button @click="newAssignmentModal()"
                 class="btn btn-secondary btn-sm my-2">
                     <font-awesome-icon icon="fa-solid fa-plus" />
-                    <span class="ml-2">{{s$('project/project_assign/assign_user')}}</span>
+                    <span class="ml-2">{{s$('project_list/project_assign/assign_user')}}</span>
                 </button>
                 <Pagination class="ml-auto my-2" :page="page" :pages="pages" @page="loadData" />
             </div>
@@ -158,11 +158,11 @@ export default {
                 <table class="my-table">
                     <thead>
                         <tr>
-                            <th>{{s$('project/project_assign/user')}}</th>
-                            <th>{{s$('project/project_assign/name')}}</th>
-                            <th>{{s$('project/project_assign/rights')}}</th>
-                            <th>{{s$('project/project_assign/assigned_by')}}</th>
-                            <th>{{s$('project/project_assign/change')}}</th>
+                            <th>{{s$('project_list/project_assign/user')}}</th>
+                            <th>{{s$('project_list/project_assign/name')}}</th>
+                            <th>{{s$('project_list/project_assign/rights')}}</th>
+                            <th>{{s$('project_list/project_assign/assigned_by')}}</th>
+                            <th>{{s$('project_list/project_assign/change')}}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -207,20 +207,20 @@ export default {
         
         <!-- Edit Assignment Modal -->
         <Modal narrow ref="assignment_modal" close-at-bg
-        :title="isNew ? s$('project/project_assign/assign_user') : user_id">
+        :title="isNew ? s$('project_list/project_assign/assign_user') : user_id">
 
             <div class="mb-2" v-if="isNew">
                 <label class="label py-0" for="id">
-                    {{s$('project/project_assign/user_id')}}
+                    {{s$('project_list/project_assign/user_id')}}
                 </label>
                 <input type="text" id="user_id" v-model="user_id"
-                :placeholder="s$('project/project_assign/user_id')"
+                :placeholder="s$('project_list/project_assign/user_id')"
                 @focus="error = null" class="input w-full" />
             </div>
 
             <div>
                 <label class="label py-0">
-                    {{s$('project/project_assign/rights')}}
+                    {{s$('project_list/project_assign/rights')}}
                 </label>
                 <div class="form-box mb-2">
                     <div class="flex items-center"
@@ -247,7 +247,7 @@ export default {
                 <button class="btn btn-neutral btn-sm" :disabled="isLoading" @click="removeAssignment">
                     <span v-if="!isLoading">
                         <font-awesome-icon icon="fa-solid fa-trash" />
-                        <span class="ml-2">{{s$('project/remove')}}</span>
+                        <span class="ml-2">{{s$('project_list/remove')}}</span>
                     </span>
                     <span v-else><Spinner /></span>
                 </button>

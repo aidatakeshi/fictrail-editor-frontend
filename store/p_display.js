@@ -11,7 +11,7 @@ export const state = () => ({
     longitude_max: null,
     latitude_min: null,
     latitude_max: null,
-    edit_mode: "ref_image",
+    edit_mode: "ref_images",
     selected: {
         type: null,
         id: null,
@@ -19,6 +19,8 @@ export const state = () => ({
         index: null,
         position: null,
     },
+    info_panel_open: false,
+    info_panel_semi: true,
     display: {
         show_map_ref_images: true,
         show_lat_long_lines: true,
@@ -65,6 +67,11 @@ export const getters = {
     selected_part: (s) => s.selected.part,
     selected_index: (s) => s.selected.index,
     selected_position: (s) => s.selected.position,
+    info_panel_status: (s) => {
+        if (!s.info_panel_open) return 'close';
+        if (!s.info_panel_semi) return 'open';
+        return 'semi-open';
+    },
     //
     isShowMapRefImages: (s) => s.display.show_map_ref_images,
     isShowLatLongLines: (s) => s.display.show_lat_long_lines,
@@ -114,12 +121,15 @@ export const mutations = {
         }
     },
     //
-    edit_mode(s, val) { s.edit_mode = val; },
+    edit_mode(s, val){ s.edit_mode = val; },
     selected(s, val_obj){
         for (let f in s.selected){
             if (val_obj[f] !== undefined) s.selected[f] = val_obj[f];
         }
     },
+    info_panel_open(s, val){ s.info_panel_open = val; },
+    info_panel_semi(s, val){ s.info_panel_semi = val; },
+    //
     display(s, val_obj){
         for (let f in s.display){
             if (val_obj[f] !== undefined) s.display[f] = val_obj[f];
