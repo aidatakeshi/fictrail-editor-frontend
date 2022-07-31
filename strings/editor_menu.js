@@ -64,4 +64,9 @@ exports.strings = {
         "zh-hk": "鐵道線與車站",
         "zh-cn": "铁道线与车站",
     },
+    "return_home": {
+        "en":    "Project List",
+        "zh-hk": "返回專案一覽",
+        "zh-cn": "返回专案一览",
+    },
 };

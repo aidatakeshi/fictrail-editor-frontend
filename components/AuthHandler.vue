@@ -42,7 +42,6 @@ export default {
             //Get Tokens
             const bearer_token = this.$store.getters.bearer_token;
             if (!bearer_token){
-                console.log(114514);
                 this.$store.commit('myself', null);
                 return this.$emit('myself', null);
             }
@@ -123,7 +122,7 @@ export default {
 
             <div class="mb-2">
                 <label class="label py-0" for="username">
-                    {{s$('login/username')}}
+                    <span class="label-text">{{s$('login/username')}}</span>
                 </label>
                 <input type="text" id="username" v-model="username" :placeholder="s$('login/username')"
                 @focus="error = null" class="input w-full" />
@@ -131,7 +130,7 @@ export default {
 
             <div class="mb-2">
                 <label class="label py-0" for="password">
-                    {{s$('login/password')}}
+                    <span class="label-text">{{s$('login/password')}}</span>
                 </label>
                 <input type="password" id="password" v-model="password" :placeholder="s$('login/password')"
                 @focus="error = null" class="input w-full" />

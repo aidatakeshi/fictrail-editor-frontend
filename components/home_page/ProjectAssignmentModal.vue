@@ -59,7 +59,7 @@ export default {
         //Load Assignment Data
         async loadData(_page = 1){
             this.$refs.toasts.setLoading(true);
-            const url = `project_list/${encodeURIComponent(this.project.id)}/assignment`;
+            const url = `project/${encodeURIComponent(this.project.id)}/assignment`;
             const response = await this.callAPI('GET', url, {_page});
             this.$refs.toasts.setLoading(false);
             if (response._error){
@@ -93,7 +93,7 @@ export default {
             const _project_id = encodeURIComponent(this.project.id);
             const _user_id = encodeURIComponent(this.user_id);
             const _rights = encodeURIComponent(this.rights);
-            const url = `project_list/${_project_id}/assign?user_id=${_user_id}&rights=${_rights}`;
+            const url = `project/${_project_id}/assign?user_id=${_user_id}&rights=${_rights}`;
             const response = await this.callAPI('PUT', url);
             //If Error
             if (response._error){
@@ -115,9 +115,13 @@ export default {
         },
         //Remove Assignment
         async removeAssignment(){
+            //Confirm First
+            const c = confirm(s$('project_list/unassign/confirm'));
+            if (!c) return false;
+            //Proceed
             const _project_id = encodeURIComponent(this.project.id);
             const _user_id = encodeURIComponent(this.user_id);
-            const url = `project_list/${_project_id}/unassign?user_id=${_user_id}`;
+            const url = `project/${_project_id}/unassign?user_id=${_user_id}`;
             const response = await this.callAPI('PUT', url);
             //If Error
             if (response._error){
@@ -210,8 +214,8 @@ export default {
         :title="isNew ? s$('project_list/project_assign/assign_user') : user_id">
 
             <div class="mb-2" v-if="isNew">
-                <label class="label py-0" for="id">
-                    {{s$('project_list/project_assign/user_id')}}
+                <label class="label py-0" for="user_id">
+                    <span class="label-text">{{s$('project_list/project_assign/user_id')}}</span>
                 </label>
                 <input type="text" id="user_id" v-model="user_id"
                 :placeholder="s$('project_list/project_assign/user_id')"
@@ -220,16 +224,13 @@ export default {
 
             <div>
                 <label class="label py-0">
-                    {{s$('project_list/project_assign/rights')}}
+                    <span class="label-text">{{s$('project_list/project_assign/rights')}}</span>
                 </label>
-                <div class="form-box mb-2">
-                    <div class="flex items-center"
-                    v-for="v in ['owner', 'editor', 'viewer']" :key="v">
-                        <input type="radio" :id="`rights_${v}`" @focus="error = null"
-                            class="radio" v-model="rights" :value="v"
-                        />
-                        <label class="label ml-2" :for="`rights_${v}`">
+                <div class="form-box mb-2 py-1">
+                    <div v-for="v in ['owner', 'editor', 'viewer']" :key="v">
+                        <label class="label py-1 cursor-pointer">
                             <RightsBadge class="badge-md" :rights="v" />
+                            <input type="radio" @focus="error = null" class="radio" v-model="rights" :value="v" />
                         </label>
                     </div>
                 </div>
@@ -247,7 +248,7 @@ export default {
                 <button class="btn btn-neutral btn-sm" :disabled="isLoading" @click="removeAssignment">
                     <span v-if="!isLoading">
                         <font-awesome-icon icon="fa-solid fa-trash" />
-                        <span class="ml-2">{{s$('project_list/remove')}}</span>
+                        <span class="ml-2">{{s$('project_list/unassign')}}</span>
                     </span>
                     <span v-else><Spinner /></span>
                 </button>

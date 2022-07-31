@@ -109,6 +109,16 @@ exports.strings = {
         "zh-hk": "更改",
         "zh-cn": "更改",
     },
+    "unassign": {
+        "en":    "Unassign User",
+        "zh-hk": "移除使用者",
+        "zh-cn": "移除使用者",
+    },
+    "unassign/confirm": {
+        "en":    "Confirm to unassign this user?",
+        "zh-hk": "確定移除此使用者？",
+        "zh-cn": "确定移除此使用者？",
+    },
     "project_assign/info_public": {
         "en":    "This is a project that allows public viewing.",
         "zh-hk": "這是一個容許公開閱覽的專案。",

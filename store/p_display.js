@@ -38,11 +38,11 @@ export const state = () => ({
             region: [],
             region_sub: [],
         },
-    },
-    hidden: {
-        map_ref_image: [],
-        line_type: [],
-        operator_type: [],
+        hidden: {
+            map_ref_image: [],
+            line_type: [],
+            operator_type: [],
+        },
     },
 });
 
@@ -135,24 +135,33 @@ export const mutations = {
             if (val_obj[f] !== undefined) s.display[f] = val_obj[f];
         }
     },
-    showMapRefImages(s){ s.display.show_map_ref_images = true; },
-    hideMapRefImages(s){ s.display.show_map_ref_images = false; },
-    showLatLongLines(s){ s.display.show_lat_long_lines = true; },
-    hideLatLongLines(s){ s.display.show_lat_long_lines = false; },
-    showRegionBorders(s){ s.display.show_region_borders = true; },
-    hideRegionBorders(s){ s.display.show_region_borders = false; },
-    showRegionSubBorders(s){ s.display.show_region_sub_borders = true; },
-    hideRegionSubBorders(s){ s.display.show_region_sub_borders = false; },
-    showStations(s){ s.display.show_stations = true; },
-    hideStations(s){ s.display.show_stations = false; },
-    showStationsMinor(s){ s.display.show_stations_minor = true; },
-    hideStationsMinor(s){ s.display.show_stations_minor = false; },
-    showStationsNotInUse(s){ s.display.show_stations_not_in_use = true; },
-    hideStationsNotInUse(s){ s.display.show_stations_not_in_use = false; },
-    showStationsSignalOnly(s){ s.display.show_stations_signal_only = true; },
-    hideStationsSignalOnly(s){ s.display.show_stations_signal_only = false; },
-    setRailLineColorByLineType(s){ s.display.rail_line_color = "rail_line_type"; },
-    setRailLineColorByOperatorType(s){ s.display.rail_line_color = "rail_operator_type"; },
+    show_map_ref_images(s, val_bool){
+        s.display.show_map_ref_images = val_bool;
+    },
+    show_lat_long_lines(s, val_bool){
+        s.display.show_lat_long_lines = val_bool;
+    },
+    show_region_borders(s, val_bool){
+        s.display.show_region_borders = val_bool;
+    },
+    show_region_sub_borders(s, val_bool){
+        s.display.show_region_sub_borders = val_bool;
+    },
+    show_stations(s, val_bool){
+        s.display.show_stations = val_bool;
+    },
+    show_stations_minor(s, val_bool){
+        s.display.show_stations_minor = val_bool;
+    },
+    show_stations_not_in_use(s, val_bool){
+        s.display.show_stations_not_in_use = val_bool;
+    },
+    show_stations_signal_only(s, val_bool){
+        s.display.show_stations_signal_only = val_bool;
+    },
+    rail_line_color(s, value){
+        s.display.rail_line_color = value;
+    },
     //
     unlocked(s, val_obj){
         for (let f in s.display.unlocked){
@@ -164,6 +173,7 @@ export const mutations = {
             if (val_obj[f] !== undefined) s.display.hidden[f] = val_obj[f];
         }
     },
+    //
     unlockMapRefImage(s, id){ s.unlocked.map_ref_image.push(id); },
     lockMapRefImage(s, id){
         s.unlocked.map_ref_image = s.unlocked.map_ref_image.filter((item) => item.id !== id);
@@ -238,7 +248,7 @@ export const actions = {
     save_display({state: s}){
         if (process.client){
             const val = JSON.stringify(s.display);
-            localStorage.setItem(`${s.project_id}/edit_mode`, val);
+            localStorage.setItem(`${s.project_id}/display`, val);
         }
     },
 };

@@ -12,17 +12,36 @@
 /* Forms */
 .form-box {
     @apply p-2 rounded-md;
-    @apply border border-slate-100 dark:border-slate-800;
+    @apply border border-slate-200 dark:border-slate-800;
 }
 .input { /* Override DaisyUI .input class */
-    @apply bg-slate-100 dark:bg-slate-900;
-    @apply disabled:bg-gray-300 disabled:text-gray-500 disabled:border-none;
+    @apply bg-slate-100 dark:bg-slate-900 border-none;
+    @apply disabled:bg-gray-300 disabled:text-gray-500;
     @apply dark:disabled:bg-gray-700 dark:disabled:text-gray-500;
+}
+.checkbox { /* Override DaisyUI .checkbox class */
+    @apply border-none;
+    @apply bg-slate-100 dark:bg-slate-800;
+}
+.select { /* Override DaisyUI .select class */
+    @apply py-0 border-none;
+    @apply bg-slate-100 dark:bg-slate-900 border-none;
+    @apply disabled:bg-gray-300 disabled:text-gray-500;
+    @apply dark:disabled:bg-gray-700 dark:disabled:text-gray-500;
+}
+.label-text{ /* Override DaisyUI .label-text class */
+    @apply text-black dark:text-white;
 }
 
 /* Buttons */
 .btn { /* Override DaisyUI .btn class */
     @apply normal-case text-white whitespace-nowrap;
+    @apply disabled:bg-gray-300 disabled:text-gray-500;
+    @apply dark:disabled:bg-gray-700 dark:disabled:text-gray-500;
+}
+.btn-toggle {
+    @apply bg-slate-100 hover:bg-slate-100 dark:bg-slate-900 dark:hover:bg-slate-900;
+    @apply text-black dark:text-white border-none;
     @apply disabled:bg-gray-300 disabled:text-gray-500;
     @apply dark:disabled:bg-gray-700 dark:disabled:text-gray-500;
 }
@@ -49,4 +68,56 @@
 }
 .my-table-hover{
     @apply hover:bg-yellow-100 dark:hover:bg-stone-800;
+}
+
+/* Navigation Bar (Home Page) */
+.top-nav-button {
+    @apply btn btn-ghost normal-case px-2;
+}
+
+/* Drawer (refer to component) / Dropdown Content */
+.my-drawer{
+    @apply absolute right-0 top-0 bottom-0 w-64 p-2 shadow-md;
+    @apply bg-slate-100 dark:bg-slate-900 text-slate-900 dark:text-slate-100;
+}
+.my-dropdown {
+    @apply dropdown-content menu p-2 shadow rounded-xl;
+    @apply bg-slate-200 dark:bg-slate-800 text-slate-900 dark:text-slate-100;
+}
+.my-drawer hr{
+    @apply border-slate-300 dark:border-slate-700;
+}
+
+/* Buttons in Drawer / Dropdown Button */
+.my-dropdown a{
+    @apply text-sm font-semibold normal-case whitespace-nowrap rounded-lg;
+    @apply px-4 py-2;
+}
+.my-drawer-btn {
+    @apply btn btn-ghost btn-sm normal-case whitespace-nowrap p-0;
+}
+.my-dropdown a, /* Color Scheme of Buttons in Drawer / Dropdown */
+.my-drawer-btn{
+    @apply text-black dark:text-white;
+    @apply hover:bg-slate-300 dark:hover:bg-slate-700;
+    @apply active:bg-slate-400 dark:active:bg-slate-600;
+}
+.my-dropdown a svg, /* ...SVG Colorization */
+.my-drawer-btn svg{
+    @apply fill-black dark:fill-white;
+}
+.my-dropdown a.selected, /* Color Scheme of Buttons (Selected Mode) */
+.my-drawer-btn.selected{
+    @apply bg-slate-500 hover:bg-slate-500 text-white;
+}
+.my-dropdown a.selected svg, /* ...SVG Colorization */
+.my-drawer-btn.selected svg{
+    @apply fill-white;
+}
+.my-drawer-btn.btn-block{ /* Left-align for full-width buttons in Drawer */
+    @apply justify-start px-4;
+}
+.my-dropdown a svg, /* Unify width of SVG icons in buttons */
+.my-drawer-btn.btn-block svg{
+    @apply w-8 -ml-2;
 }

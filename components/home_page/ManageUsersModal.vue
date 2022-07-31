@@ -241,7 +241,7 @@ export default {
 
             <div class="mb-2">
                 <label class="label py-0" for="id">
-                    {{s$('user/column/id')}}
+                    <span class="label-text">{{s$('user/column/id')}}</span>
                 </label>
                 <input type="text" id="id" v-model="edit_user.data.id"
                 :placeholder="s$('user/column/id')" :disabled="!edit_user.isNew"
@@ -253,7 +253,7 @@ export default {
 
             <div class="mb-2">
                 <label class="label py-0" for="name">
-                    {{s$('user/column/name')}}
+                    <span class="label-text">{{s$('user/column/name')}}</span>
                 </label>
                 <input type="text" id="name" v-model="edit_user.data.name"
                 :placeholder="s$('user/column/name')"
@@ -265,7 +265,7 @@ export default {
 
             <div class="mb-2">
                 <label class="label py-0" for="email">
-                    {{s$('user/column/email')}}
+                    <span class="label-text">{{s$('user/column/email')}}</span>
                 </label>
                 <input type="text" id="email" v-model="edit_user.data.email"
                 :placeholder="s$('user/column/email')"
@@ -277,7 +277,7 @@ export default {
 
             <div class="mb-2">
                 <label class="label py-0" for="password">
-                    {{s$('user/password')}}
+                    <span class="label-text">{{s$('user/password')}}</span>
                 </label>
                 <input type="password" id="password" v-model="edit_user.data.password"
                 :placeholder="edit_user.isNew ? s$('user/password') : s$('user/password_change_needed')"
@@ -287,27 +287,27 @@ export default {
                 </label>
             </div>
 
-            <div class="mb-2 flex items-center">
-                <input type="checkbox" id="is_enabled" class="checkbox" :disabled="edit_user.isMyself"
-                v-model="edit_user.data.is_enabled" />
-                <label class="label py-0" for="is_enabled">
-                    {{s$('user/column/is_enabled')}}
+            <div class="mb-2">
+                <label class="label cursor-pointer py-0">
+                    <span class="label-text">{{s$('user/column/is_enabled')}}</span>
+                    <input type="checkbox" class="checkbox"
+                    :disabled="edit_user.isMyself" v-model="edit_user.data.is_enabled" />
                 </label>
             </div>
 
-            <div class="mb-2 flex items-center">
-                <input type="checkbox" id="is_root_user" class="checkbox" :disabled="edit_user.isMyself"
-                v-model="edit_user.data.is_root_user" />
-                <label class="label py-0" for="is_root_user">
-                    {{s$('user/column/is_root_user')}}
+            <div class="mb-2">
+                <label class="label cursor-pointer py-0">
+                    <span class="label-text">{{s$('user/column/is_root_user')}}</span>
+                    <input type="checkbox" class="checkbox"
+                    :disabled="edit_user.isMyself" v-model="edit_user.data.is_root_user" />
                 </label>
             </div>
 
-            <div class="mb-2 flex items-center">
-                <input type="checkbox" id="can_create_new_project" class="checkbox" :disabled="edit_user.isMyself"
-                v-model="edit_user.data.can_create_new_project" />
-                <label class="label py-0" for="can_create_new_project">
-                    {{s$('user/column/can_create_new_project')}}
+            <div class="mb-2">
+                <label class="label cursor-pointer py-0">
+                    <span class="label-text">{{s$('user/column/can_create_new_project')}}</span>
+                    <input type="checkbox" class="checkbox"
+                    :disabled="edit_user.isMyself" v-model="edit_user.data.can_create_new_project" />
                 </label>
             </div>
 

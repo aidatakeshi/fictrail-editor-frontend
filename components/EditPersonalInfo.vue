@@ -271,7 +271,7 @@ export default {
                         <div>
                             <input type="password" id="new_password2" v-model="editing.new_password2"
                             :placeholder="s$('user/password/new2')"
-                            @focus="error.password = null" class="input-sm w-full mb-2" />
+                            @focus="error.password = null" class="input input-sm w-full mb-2" />
                         </div>
                         <div class="col-span-2">
                             <button @click="submitPassword" class="btn btn-secondary btn-password"

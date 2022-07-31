@@ -253,7 +253,7 @@ export default {
 
             <div class="mb-2">
                 <label class="label py-0" for="id">
-                    {{s$('project_list/edit_project/id')}}
+                    <span class="label-text">{{s$('project_list/edit_project/id')}}</span>
                 </label>
                 <input type="text" id="id" v-model="edit_project.data.id"
                 :placeholder="s$('project_list/edit_project/id')" :disabled="!edit_project.isNew"
@@ -265,7 +265,7 @@ export default {
 
             <div class="mb-2">
                 <label class="label py-0" for="name">
-                    {{s$('project_list/edit_project/name')}}
+                    <span class="label-text">{{s$('project_list/edit_project/name')}}</span>
                 </label>
                 <input type="text" id="name" v-model="edit_project.data.name"
                 :placeholder="s$('project_list/edit_project/name')"
@@ -275,10 +275,10 @@ export default {
                 </label>
             </div>
 
-            <div class="mb-2 flex items-center">
-                <input type="checkbox" id="is_public" class="checkbox" v-model="edit_project.data.is_public" />
-                <label class="label py-0" for="is_public">
-                    {{s$('project_list/edit_project/is_public')}}
+            <div class="mb-2">
+                <label class="label cursor-pointer py-0">
+                    <span class="label-text">{{s$('project_list/edit_project/is_public')}}</span>
+                    <input type="checkbox" class="checkbox" v-model="edit_project.data.is_public" />
                 </label>
             </div>
 

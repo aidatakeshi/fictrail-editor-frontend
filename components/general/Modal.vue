@@ -67,39 +67,35 @@ export default {
     <div>
         <input type="checkbox" class="modal-toggle" v-model="toggle" />
 
-        <div @click.self="bgClicked" class="modal">
+        <div @click.self="bgClicked" class="modal overflow-visible">
 
             <div for="" class="modal-box relative p-0 w-full flex flex-col
             bg-white dark:bg-black text-black dark:text-white" :class="modalBoxClass">
 
-                <div :class="bodyClass">
+                <!-- Header -->
+                <div class="flex items-center bg-slate-600 text-white"
+                v-if="title || $slots.header">
+                    <h3 class="text-lg font-bold px-2 sm:px-4 py-2">
+                        <slot name="header">
+                            {{title}}
+                        </slot>
+                    </h3>
+                    <button class="btn btn-ghost ml-auto" v-if="!hideClose" @click="toggle = false">
+                        <font-awesome-icon size="xl" icon="fa-solid fa-xmark" />
+                    </button>
+                </div>
 
-                    <!-- Header -->
-                    <div class="flex items-center bg-slate-600 text-white"
-                    v-if="title || $slots.header">
-                        <h3 class="text-lg font-bold px-2 sm:px-4 py-3">
-                            <slot name="header">
-                                {{title}}
-                            </slot>
-                        </h3>
-                        <button class="btn btn-ghost ml-auto" v-if="!hideClose" @click="toggle = false">
-                            <font-awesome-icon size="xl" icon="fa-solid fa-xmark" />
-                        </button>
+                <!-- Main Content -->
+                <div class="overflow-y-auto" :class="bodyClass">
+                    <div class="p-2 sm:px-4">
+                        <slot />
                     </div>
+                </div>
 
-                    <!-- Main Content -->
-                    <div class="overflow-y-auto">
-                        <div class="p-2 sm:px-4">
-                            <slot />
-                        </div>
-                    </div>
-
-                    <!-- Footer -->
-                    <div v-if="$slots.footer"
-                    class="bg-slate-300 dark:bg-slate-700 px-2 sm:px-4 py-2">
-                        <slot name="footer" />
-                    </div>
-
+                <!-- Footer -->
+                <div v-if="$slots.footer"
+                class="bg-slate-300 dark:bg-slate-700 px-2 sm:px-4 py-1">
+                    <slot name="footer" />
                 </div>
 
                 <!---------------------------->

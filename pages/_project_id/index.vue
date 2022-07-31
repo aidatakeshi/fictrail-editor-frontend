@@ -84,7 +84,7 @@ export default {
     <div class="min-h-screen bg-white dark:bg-black text-slate-900 dark:text-slate-100">
 
         <!-- Loading / Error Box -->
-        <div class="grid place-items-center h-screen" v-if="is_loading || error">
+        <div class="grid place-items-center h-screen p-2" v-if="is_loading || error">
             <div class="bg-slate-100 dark:bg-slate-900 rounded-2xl w-full max-w-lg px-2 py-8">
                 <!-- Error -->
                 <div v-if="error">
