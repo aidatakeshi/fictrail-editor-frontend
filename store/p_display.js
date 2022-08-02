@@ -209,17 +209,29 @@ export const mutations = {
 };
 
 export const actions = {
-    init({commit}, project_id){
+    init({commit, state}, project_id){
         //Set project_id
         commit('project_id', project_id);
         //Load from local storage
         if (process.client){
-            //x, y, logzoom (number)
-            for (let attr of ['x', 'y', 'logzoom']){
-                const value = parseFloat(localStorage.getItem(`${project_id}/${attr}`));
-                if (!isNaN(value)){
-                    commit(attr, value);
-                }
+            //x, y, logzoom (number) - Take Center of Map by default
+            const x = parseFloat(localStorage.getItem(`${project_id}/x`));
+            const y = parseFloat(localStorage.getItem(`${project_id}/y`));
+            const logzoom = parseFloat(localStorage.getItem(`${project_id}/logzoom`));
+            if (!isNaN(x)){
+                commit('x', x);
+            }else if (state.longitude_min !== null && state.longitude_max !== null){
+                commit('x', (state.longitude_min + state.longitude_max) / 2);
+            }
+            if (!isNaN(y)){
+                commit('y', y);
+            }else if (state.latitude_min !== null && state.latitude_max !== null){
+                commit('y', (state.latitude_min + state.latitude_max) / 2);
+            }
+            if (!isNaN(logzoom)){
+                commit('logzoom', logzoom);
+            }else{
+                commit('logzoom', 0);
             }
             //edit_mode (string)
             const edit_mode = localStorage.getItem(`${project_id}/edit_mode`);

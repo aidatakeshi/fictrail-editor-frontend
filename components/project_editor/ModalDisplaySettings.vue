@@ -14,7 +14,7 @@ library.add( faMoon, faSun, faEye, faLock );
 import Modal from '../general/Modal';
 
 export default {
-    name: 'EditorDisplaySettingsModal',
+    name: 'EditorModalDisplaySettings',
     mixins: [common],
     components: {
         FontAwesomeIcon, Modal,

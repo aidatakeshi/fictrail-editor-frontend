@@ -17,7 +17,7 @@ library.add(
 
 import EditorMainMenuIcon from '../icons/EditorMainMenuIcon';
 import EditorEditModeIcon from '../icons/EditorEditModeIcon';
-import DisplaySettingsModal from './DisplaySettingsModal';
+import ModalDisplaySettings from './ModalDisplaySettings';
 import Drawer from '../general/Drawer';
 
 export default {
@@ -26,7 +26,7 @@ export default {
     components: {
         FontAwesomeIcon, Drawer,
         EditorMainMenuIcon, EditorEditModeIcon,
-        DisplaySettingsModal,
+        ModalDisplaySettings,
     },
 
     data: () => ({
@@ -269,7 +269,7 @@ export default {
         </Drawer>
 
         <!-- Display Settings Modal -->
-        <DisplaySettingsModal ref="display_settings_modal" />
+        <ModalDisplaySettings ref="display_settings_modal" />
 
     </div>
 </template>

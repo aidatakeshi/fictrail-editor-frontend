@@ -6,7 +6,6 @@
 */
 import common from '../../mixins/common.js';
 import editor_load_data from '../../mixins/editor_load_data.js';
-import editor_listeners from '../../mixins/editor_listeners.js';
 import AuthHandler from '../../components/AuthHandler';
 import EditPersonalInfo from '../../components/EditPersonalInfo';
 import MainEditor from '../../components/project_editor/MainEditor';
@@ -16,8 +15,7 @@ export default {
     name: 'PageProjectEditor',
     layout: "no_scroll",
     mixins: [
-        common,
-        editor_load_data, editor_listeners,
+        common, editor_load_data,
     ],
     components: {
         AuthHandler, EditPersonalInfo, MainEditor,
@@ -61,8 +59,6 @@ export default {
             //Load Display Settings (from local storage)
             this.loading_item = 'display_settings';
             this.$store.dispatch('p_display/init', project_id);
-            //Start Listening To Screen Size
-            this.listenToScreenResize();
             //Load Display Data
             this.loading_item = 'map_display';
             await this.loadDisplayData((error, data) => {
